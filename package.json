@@ -4,14 +4,14 @@
   "scripts": {
     "build": "turbo run build",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "start": "turbo run start"
   },
   "engines": {
     "node": ">=18"
   },
   "packageManager": "pnpm@8.14.0",
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
     "eslint": "^8.57.0",
     "prettier": "^2.8.8",
     "turbo": "^2.6.1"
