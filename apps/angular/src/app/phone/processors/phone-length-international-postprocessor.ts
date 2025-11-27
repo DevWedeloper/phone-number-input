@@ -1,0 +1,17 @@
+import type {MaskitoPostprocessor} from '@maskito/core';
+import type {MetadataJson} from 'libphonenumber-js/core';
+
+import {cutPhoneByValidLength} from '../utils';
+
+const MIN_LENGTH = 3;
+export function phoneLengthInternationalPostprocessorGenerator(
+    metadata: MetadataJson,
+): MaskitoPostprocessor {
+    return ({value, selection}) => ({
+        value:
+            value.length > MIN_LENGTH
+                ? cutPhoneByValidLength({phone: value, metadata})
+                : value,
+        selection,
+    });
+}

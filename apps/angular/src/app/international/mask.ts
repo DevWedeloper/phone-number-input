@@ -2,7 +2,7 @@ import { MASKITO_DEFAULT_OPTIONS, MaskitoOptions } from '@maskito/core';
 import { AsYouType, CountryCode, getCountryCallingCode, MetadataJson } from 'libphonenumber-js/core';
 import metadata from 'libphonenumber-js/min/metadata';
 import { generatePhoneMask, getInternationalPhoneTemplate, getNationalPhoneTemplate, selectTemplate, shouldUseInternational } from '../phone/utils';
-import { validateInternationalPhonePreprocessorGenerator, validateNationalPhonePreprocessorGenerator } from '../phone/processors';
+import { phoneLengthInternationalPostprocessorGenerator, phoneLengthNationalPostprocessorGenerator, validateInternationalPhonePreprocessorGenerator, validateNationalPhonePreprocessorGenerator } from '../phone/processors';
 
 export default phoneAutoGenerator({
     isInitialModeInternational: true,
@@ -23,22 +23,22 @@ type PhoneAutoGeneratorOptions =
           separator?: string;
       };
 
-// TODO: write helper function that determines if i should handle national or international phone number
 export function phoneAutoGenerator(options: PhoneAutoGeneratorOptions): Required<MaskitoOptions> {
     const { isInitialModeInternational, countryIsoCode, metadata, separator = '-' } = options;
 
     const formatter = new AsYouType(countryIsoCode, metadata);
-
     let currentTemplate = '';
     let currentPhoneLength = 0;
 
     return {
         ...MASKITO_DEFAULT_OPTIONS,
         mask: ({ value }) => {
-            const newTemplate = isInitialModeInternational || shouldUseInternational(isInitialModeInternational, value) ?
-                getInternationalPhoneTemplate(formatter, '+' + value, separator) :
+            const isInternational = isInitialModeInternational || shouldUseInternational(isInitialModeInternational, value);
+
+            const newTemplate = isInternational ?
+                getInternationalPhoneTemplate(formatter, value, separator) :
                 getNationalPhoneTemplate(formatter, `+${getCountryCallingCode(countryIsoCode, metadata)}` + value, separator);
-            const newPhoneLength = value.replace(/\D/g, '').length;
+            const newPhoneLength = value.replaceAll(/\D/g, '').length;
 
             currentTemplate = selectTemplate({
                 currentTemplate,
@@ -48,16 +48,35 @@ export function phoneAutoGenerator(options: PhoneAutoGeneratorOptions): Required
             });
             currentPhoneLength = newPhoneLength;
 
-            return generatePhoneMask({ value, template: currentTemplate });
+            if (currentTemplate.length === 1 && isInternational) {
+                return ['+', /\d/];
+            }
+
+            return generatePhoneMask({
+                value,
+                template: currentTemplate,
+                prefix: isInternational ? '+' : ''
+            });
         },
         preprocessors: [
             (data, actionType) => {
-                const value = data.data || data.elementState.value;
+                const value = data.elementState.value || data.data;
 
                 if (isInitialModeInternational || shouldUseInternational(isInitialModeInternational, value)) {
                     return validateInternationalPhonePreprocessorGenerator({ prefix: '+', metadata })(data, actionType);
                 } else {
                     return validateNationalPhonePreprocessorGenerator({ prefix: `+${getCountryCallingCode(countryIsoCode, metadata)}`, countryIsoCode, metadata })(data, actionType);
+                }
+            }
+        ],
+        postprocessors: [
+            (elementState, initialElementState) => {
+                const value = elementState.value;
+
+                if (isInitialModeInternational || shouldUseInternational(isInitialModeInternational, value)) {
+                    return phoneLengthInternationalPostprocessorGenerator(metadata)(elementState, initialElementState);
+                } else {
+                    return phoneLengthNationalPostprocessorGenerator({ prefix: `+${getCountryCallingCode(countryIsoCode, metadata)}`, metadata })(elementState, initialElementState);
                 }
             }
         ]

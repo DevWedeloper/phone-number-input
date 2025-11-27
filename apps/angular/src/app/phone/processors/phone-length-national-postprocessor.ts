@@ -4,7 +4,7 @@ import type {MetadataJson} from 'libphonenumber-js/core';
 import {cutPhoneByValidLength} from '../utils';
 
 const MIN_LENGTH = 3;
-export function phoneLengthPostprocessorGenerator({
+export function phoneLengthNationalPostprocessorGenerator({
     prefix,
     metadata,
 }: {
