@@ -3,19 +3,19 @@ import mask from './mask';
 import {MaskitoDirective} from '@maskito/angular';
 
 @Component({
-  selector: 'app-international-strict',
+  selector: 'app-auto',
   imports: [MaskitoDirective],
   template: `
     <input
       class="border-border border rounded-sm"
       type="tel"
-      placeholder="International strict..."
+      placeholder="Auto..."
       [maskito]="mask"
       autocomplete="tel"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InternationalStrict {
+export class Auto {
   protected mask = mask;
 }

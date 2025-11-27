@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
-import { International } from './international/international';
+import { Auto } from './auto/auto';
 import { National } from './national/national';
-import { InternationalStrict } from './international-strict/international-strict';
+import { International } from './international/international';
 
 @Component({
   selector: 'app-root',
-  imports: [International, National, InternationalStrict],
+  imports: [Auto, National, International],
   host: {
     class: 'flex min-h-screen justify-center items-center',
   },
   template: `
     <div class="flex flex-col gap-4">
-      <app-international />
+      <app-auto />
       <app-national />
-      <app-international-strict />
+      <app-international />
     </div>
   `,
 })
