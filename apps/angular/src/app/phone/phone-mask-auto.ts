@@ -1,13 +1,7 @@
 import { MASKITO_DEFAULT_OPTIONS, MaskitoOptions } from '@maskito/core';
 import { AsYouType, CountryCode, getCountryCallingCode, MetadataJson } from 'libphonenumber-js/core';
-import metadata from 'libphonenumber-js/min/metadata';
-import { generatePhoneMask, getInternationalPhoneTemplate, getNationalPhoneTemplate, selectTemplate, shouldUseInternational } from '../phone/utils';
-import { phoneLengthInternationalPostprocessorGenerator, phoneLengthNationalPostprocessorGenerator, validateInternationalPhonePreprocessorGenerator, validateNationalPhonePreprocessorGenerator } from '../phone/processors';
-
-export default phoneAutoGenerator({
-    isInitialModeInternational: true,
-    metadata,
-});
+import { generatePhoneMask, getInternationalPhoneTemplate, getNationalPhoneTemplate, selectTemplate, shouldUseInternational } from './utils';
+import { phoneLengthInternationalPostprocessorGenerator, phoneLengthNationalPostprocessorGenerator, validateInternationalPhonePreprocessorGenerator, validateNationalPhonePreprocessorGenerator } from './processors';
 
 type PhoneAutoGeneratorOptions =
     | {

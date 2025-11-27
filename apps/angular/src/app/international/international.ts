@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import mask from './mask';
 import {MaskitoDirective} from '@maskito/angular';
+import { phoneInternationalGenerator } from '../phone';
+import metadata from 'libphonenumber-js/min/metadata';
 
 @Component({
   selector: 'app-international',
@@ -17,5 +18,8 @@ import {MaskitoDirective} from '@maskito/angular';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class International {
-  protected mask = mask;
+  protected mask = phoneInternationalGenerator({
+    countryIsoCode: 'US',
+    metadata,
+  });
 }

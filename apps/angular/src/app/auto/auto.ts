@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import mask from './mask';
 import {MaskitoDirective} from '@maskito/angular';
+import { phoneAutoGenerator } from '../phone';
+import metadata from 'libphonenumber-js/min/metadata';
 
 @Component({
   selector: 'app-auto',
@@ -17,5 +18,8 @@ import {MaskitoDirective} from '@maskito/angular';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Auto {
-  protected mask = mask;
+  protected mask = phoneAutoGenerator({
+      isInitialModeInternational: true,
+      metadata,
+  });
 }
