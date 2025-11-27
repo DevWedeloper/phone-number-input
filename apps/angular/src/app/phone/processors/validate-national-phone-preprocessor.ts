@@ -15,7 +15,7 @@ export function validateNationalPhonePreprocessorGenerator({
     countryIsoCode: CountryCode;
     metadata: MetadataJson;
 }): MaskitoPreprocessor {
-    return ({elementState, data}) => {
+    return ({elementState, data}, actionType) => {
         const {selection, value} = elementState;
         
         // handling autocomplete
@@ -31,7 +31,7 @@ export function validateNationalPhonePreprocessorGenerator({
             const trimmedVal = val.slice(prefix.length).trim();
             const test = {elementState: {value: trimmedVal, selection}};
 
-            console.log('return at autocomplete', {val, test});
+            console.log('return at autocomplete', {test, actionType});
 
             return test
         }
@@ -49,7 +49,7 @@ export function validateNationalPhonePreprocessorGenerator({
 
                 const {nationalNumber} = phone;
 
-                console.log('return at try', {nationalNumber, elementState, data});
+                console.log('return at try', {nationalNumber, elementState, data, actionType});
 
                 return {
                     elementState,
@@ -57,11 +57,11 @@ export function validateNationalPhonePreprocessorGenerator({
                 };
             }
         } catch {
-            console.log('return at catch', {elementState, data});
+            console.log('return at catch', {elementState, data, actionType});
             return {elementState};
         }
 
-        console.log('return at end', {elementState, data});
+        console.log('return at end', {elementState, data, actionType});
         return {elementState};
     };
 }
