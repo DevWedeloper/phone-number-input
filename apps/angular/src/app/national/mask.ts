@@ -27,7 +27,7 @@ export function phoneNationalGenerator({
     return {
         ...MASKITO_DEFAULT_OPTIONS,
         mask: ({ value }) => {
-            const newTemplate = getNationalPhoneTemplate(formatter, prefix + value.replace(/\D/g, ''), separator);
+            const newTemplate = getNationalPhoneTemplate(formatter, prefix + value, separator);
             const newPhoneLength = value.replace(/\D/g, '').length;
 
             currentTemplate = selectTemplate({
