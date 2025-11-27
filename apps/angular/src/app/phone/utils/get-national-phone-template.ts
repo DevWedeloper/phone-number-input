@@ -12,7 +12,7 @@ export function getNationalPhoneTemplate(
     const template =
         split.length > 1
             ? `${split.slice(0, 1).join(' ')} ${split.slice(1).join(separator)}`
-            : initialTemplate;
+            : split.join('');
 
     formatter.reset();
 
