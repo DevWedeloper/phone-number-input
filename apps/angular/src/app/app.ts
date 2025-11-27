@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { International } from './international/international';
 import { National } from './national/national';
 import { InternationalStrict } from './international-strict/international-strict';
+import { Test } from './test/test';
 
 @Component({
   selector: 'app-root',
-  imports: [International, National, InternationalStrict],
+  imports: [International, National, InternationalStrict, Test],
   host: {
     class: 'flex min-h-screen justify-center items-center',
   },
@@ -14,6 +15,7 @@ import { InternationalStrict } from './international-strict/international-strict
       <app-international />
       <app-national />
       <app-international-strict />
+      <app-test />
     </div>
   `,
 })
