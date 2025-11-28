@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PhoneState } from './phone-state';
 
 @Component({
-  selector: 'app-phone-field',
+  selector: 'phone-field',
   template: `
     <ng-content />
   `,

@@ -1,19 +1,26 @@
 import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
 import { PhoneInput } from '../phone-input';
-import { FormsModule } from '@angular/forms';
+import { CountrySelect } from '../country-select';
+import { PhoneField } from '../phone-field';
 
 @Component({
   selector: 'app-auto',
-  imports: [PhoneInput],
+  imports: [PhoneField, PhoneInput, CountrySelect],
+  host: {
+    class: 'flex gap-4'
+  },
   template: `
-    <input
-      class="border-border border rounded-sm"
-      type="tel"
-      placeholder="Auto..."
-      autocomplete="tel"
-      phoneInput
-      (input)="onChange($event)"
-    />
+    <phone-field> 
+      <country-select />
+      <input
+        class="border-border border rounded-sm"
+        type="tel"
+        placeholder="Auto..."
+        autocomplete="tel"
+        phoneInput
+        (input)="onChange($event)"
+      />
+    </phone-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

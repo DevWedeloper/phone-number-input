@@ -14,6 +14,6 @@ export class CountryCodeTrigger {
   countryCode = input.required<CountryCode>();
 
   protected onClick(): void {
-    // TODO: set the country code in the service
+    this.phoneState.setCountry(this.countryCode());
   }
 }
