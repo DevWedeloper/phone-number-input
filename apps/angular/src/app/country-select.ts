@@ -14,7 +14,7 @@ import { TemplatePortal } from '@angular/cdk/portal';
 
 import { CountryCode, getCountries, getCountryCallingCode } from 'libphonenumber-js';
 import { CountryCodeTrigger } from './country-code-trigger';
-import { PhoneState } from './phone-state';
+import { PhoneStateData } from './phone-state-data';
 
 @Component({
   selector: 'country-select',
@@ -67,7 +67,7 @@ import { PhoneState } from './phone-state';
 export class CountrySelect {
   private overlay = inject(Overlay);
   private vcr = inject(ViewContainerRef);
-  private phoneState = inject(PhoneState);
+  private PhoneStateData = inject(PhoneStateData);
 
   private dropdownPanel = viewChild.required<TemplateRef<any>>('dropdownPanel');
   private trigger = viewChild.required<ElementRef<HTMLButtonElement>>('trigger');
@@ -77,7 +77,7 @@ export class CountrySelect {
   private countries = getCountries();
   protected searchText = signal('');
   protected filtered = computed(() => this.countries.filter(c => c.toLowerCase().includes(this.searchText())));
-  protected selectedCountry = this.phoneState.selectedCountry;
+  protected selectedCountry = this.PhoneStateData.selectedCountry;
 
   protected openDropdown() {
     if (this.overlayRef) {

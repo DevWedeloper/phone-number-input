@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PhoneState } from './phone-state';
+import { PhoneStateData } from './phone-state-data';
 
 @Component({
   selector: 'phone-field',
   template: `
     <ng-content />
   `,
-  providers: [PhoneState],
+  providers: [PhoneStateData],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhoneField {

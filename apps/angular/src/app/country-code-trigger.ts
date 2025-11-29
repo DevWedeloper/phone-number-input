@@ -1,6 +1,6 @@
 import { Directive, inject, input } from '@angular/core';
 import { CountryCode } from 'libphonenumber-js/core';
-import { PhoneState } from './phone-state';
+import { PhoneStateData } from './phone-state-data';
 
 @Directive({
   selector: '[countryCodeTrigger]',
@@ -9,11 +9,11 @@ import { PhoneState } from './phone-state';
   }
 })
 export class CountryCodeTrigger {
-  private phoneState = inject(PhoneState);
+  private PhoneStateData = inject(PhoneStateData);
 
   countryCode = input.required<CountryCode>();
 
   protected onClick(): void {
-    this.phoneState.setCountry(this.countryCode());
+    this.PhoneStateData.setCountry(this.countryCode());
   }
 }
