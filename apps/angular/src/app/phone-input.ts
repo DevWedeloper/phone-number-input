@@ -1,13 +1,12 @@
-import { computed, Directive, effect, ElementRef, forwardRef, inject, signal } from '@angular/core';
+import { booleanAttribute, computed, Directive, effect, ElementRef, forwardRef, inject, input, isDevMode, signal } from '@angular/core';
 import { MaskitoDirective } from '@maskito/angular';
 import { phoneAutoGenerator } from './phone';
 import metadata from 'libphonenumber-js/min/metadata';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
-type InputLikeElement = HTMLInputElement | HTMLTextAreaElement | HTMLElement;
+import { CountryCode } from 'libphonenumber-js';
 
 @Directive({
-  selector: 'input[phoneInput], textarea[phoneInput], [contenteditable][phoneInput]',
+  selector: 'input[phoneInput]',
   host: {
     '(input)': 'onInput($event)',
   },
@@ -22,7 +21,11 @@ type InputLikeElement = HTMLInputElement | HTMLTextAreaElement | HTMLElement;
 })
 export class PhoneInput implements ControlValueAccessor {
   private maskito = inject(MaskitoDirective);
-  private elementRef = inject(ElementRef) as ElementRef<InputLikeElement>;
+  private elementRef = inject(ElementRef) as ElementRef<HTMLInputElement>;
+
+  mode = input<'auto' | 'international' | 'national'>('auto');
+  defaultCountry = input<CountryCode | undefined>(undefined);
+  allowCountryChange = input(false, { transform: booleanAttribute })
 
   private mask = computed(() => {
     return phoneAutoGenerator({
@@ -36,6 +39,14 @@ export class PhoneInput implements ControlValueAccessor {
   private onTouched: () => void = () => {};
 
   constructor() {
+    const element = this.elementRef.nativeElement as HTMLInputElement;
+
+    if (isDevMode() && element.type !== 'tel') {
+      console.warn(
+        `PhoneInput directive prefers <input type="tel">. Current type is "${element.type}".`
+      );
+    }
+
     effect(() => this.maskito.options.set(this.mask()));
     effect(() => this.onChange(this.value()));
   }
@@ -53,20 +64,12 @@ export class PhoneInput implements ControlValueAccessor {
   }
 
   protected onInput(event: Event): void {
-    const target = event.target as InputLikeElement;
-
-    // For input or textarea
-    const value = 'value' in target ? target.value : target.innerText;
-
-    this.writeValue(value);
+    const target = event.target as HTMLInputElement;
+    this.writeValue(target.value);
   }
 
   private reset(): void {
     const element = this.elementRef.nativeElement;
-    if ('value' in element) {
-      element.value = '';
-    } else {
-      element.innerText = '';
-    }
+    this.writeValue(element.value);
   }
 }
