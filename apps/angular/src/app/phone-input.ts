@@ -4,6 +4,7 @@ import { phoneAutoGenerator } from './phone';
 import metadata from 'libphonenumber-js/min/metadata';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CountryCode } from 'libphonenumber-js';
+import { Mode } from './types/state';
 
 @Directive({
   selector: 'input[phoneInput]',
@@ -23,7 +24,7 @@ export class PhoneInput implements ControlValueAccessor {
   private maskito = inject(MaskitoDirective);
   private elementRef = inject(ElementRef) as ElementRef<HTMLInputElement>;
 
-  mode = input<'auto' | 'international' | 'national'>('auto');
+  mode = input<Mode>('auto');
   defaultCountry = input<CountryCode | undefined>(undefined);
   allowCountryChange = input(false, { transform: booleanAttribute })
 
