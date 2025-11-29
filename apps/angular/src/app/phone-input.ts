@@ -4,6 +4,8 @@ import { phoneAutoGenerator } from './phone';
 import metadata from 'libphonenumber-js/min/metadata';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+type InputLikeElement = HTMLInputElement | HTMLTextAreaElement | HTMLElement;
+
 @Directive({
   selector: 'input[phoneInput], textarea[phoneInput], [contenteditable][phoneInput]',
   host: {
@@ -20,6 +22,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class PhoneInput implements ControlValueAccessor {
   private maskito = inject(MaskitoDirective);
+  private elementRef = inject(ElementRef) as ElementRef<InputLikeElement>;
 
   private mask = computed(() => {
     return phoneAutoGenerator({
@@ -31,8 +34,6 @@ export class PhoneInput implements ControlValueAccessor {
   private value = signal('');
   private onChange: (value: string) => void = () => {};
   private onTouched: () => void = () => {};
-
-  private elementRef = inject(ElementRef) as ElementRef<HTMLInputElement | HTMLTextAreaElement | HTMLElement>;
 
   constructor() {
     effect(() => this.maskito.options.set(this.mask()));
@@ -52,7 +53,7 @@ export class PhoneInput implements ControlValueAccessor {
   }
 
   protected onInput(event: Event): void {
-    const target = event.target as HTMLInputElement | HTMLTextAreaElement | HTMLElement;
+    const target = event.target as InputLikeElement;
 
     // For input or textarea
     const value = 'value' in target ? target.value : target.innerText;
