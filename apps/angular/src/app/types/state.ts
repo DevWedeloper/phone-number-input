@@ -1,27 +1,19 @@
-import { CountryCode } from 'libphonenumber-js';
+import { CountryCode } from 'libphonenumber-js'
 
-export type Mode = 'auto' | 'international' | 'national';
-type CountryContext = 'none' | 'user-selected' | 'auto-detected';
-
-interface PhoneStateInAuto {
-  mode: 'auto';
-  input: string;
-  country: CountryCode | null;
-  countryContext: CountryContext;
+interface BasePhoneState {
+  input: string
 }
 
-interface PhoneStateInInternational {
-  mode: 'international';
-  input: string;
-  country: CountryCode;
-  countryContext: 'auto-detected';
+interface PhoneStateAuto extends BasePhoneState {
+  mode: 'auto'
+  country: CountryCode | null
+  countryContext: 'user-selected' | 'auto-detected' | 'provided'
 }
 
-interface PhoneStateInNational {
-  mode: 'national';
-  input: string;
-  country: CountryCode;
-  countryContext: 'auto-detected';
+interface PhoneStateWithCountry extends BasePhoneState {
+  mode: 'international' | 'national'
+  country: CountryCode
+  countryContext: 'provided'
 }
 
-export type PhoneState = PhoneStateInAuto | PhoneStateInInternational | PhoneStateInNational;
+export type PhoneState = PhoneStateAuto | PhoneStateWithCountry
