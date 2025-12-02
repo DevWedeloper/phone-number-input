@@ -103,7 +103,10 @@ export class CountrySelect {
       positionStrategy
     });
 
-    this.overlayRef.backdropClick().subscribe(() => this.overlayRef.dispose());
+    this.overlayRef.backdropClick().subscribe(() => {
+      this.overlayRef.dispose();
+      this.searchText.set('');
+    });
 
     const portal = new TemplatePortal(this.dropdownPanel(), this.vcr);
     this.overlayRef.attach(portal);
@@ -111,6 +114,7 @@ export class CountrySelect {
 
   protected choose() {
     this.overlayRef.dispose();
+      this.searchText.set('');
   }
 
   protected dialCode(country: CountryCode): string {

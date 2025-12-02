@@ -1,9 +1,10 @@
-import { computed, Directive, effect, ElementRef, forwardRef, inject, input, isDevMode, signal } from '@angular/core';
+import { computed, Directive, effect, ElementRef, forwardRef, inject, input, isDevMode, signal, untracked } from '@angular/core';
 import { MaskitoDirective } from '@maskito/angular';
-import { phoneAutoGenerator } from './phone';
+import { phoneAutoGenerator, phoneInternationalGenerator, phoneNationalGenerator } from './phone';
 import metadata from 'libphonenumber-js/min/metadata';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PhoneInputConfig } from './types/config';
+import { PhoneStateData } from './phone-state-data';
 
 @Directive({
   selector: 'input[phoneInput]',
@@ -22,14 +23,25 @@ import { PhoneInputConfig } from './types/config';
 export class PhoneInput implements ControlValueAccessor {
   private maskito = inject(MaskitoDirective);
   private elementRef = inject(ElementRef) as ElementRef<HTMLInputElement>;
+  private phoneStateData = inject(PhoneStateData);
 
   config = input<PhoneInputConfig>({ mode: 'auto' });
 
   private mask = computed(() => {
-    return phoneAutoGenerator({
-      isInitialModeInternational: true,
-      metadata,
-    });
+    const config = this.config();
+    const { country, derivedMode } = this.phoneStateData.countryAndDerivedMode();
+
+    if (config.mode === 'auto') {
+      if (derivedMode === 'international') {
+        return phoneAutoGenerator({ isInitialModeInternational: true, metadata });
+      } else {
+        return phoneAutoGenerator({ isInitialModeInternational: false, metadata, countryIsoCode: country! }); // handle strict mode better
+      }
+    } else if (config.mode === 'international') {
+      return phoneInternationalGenerator({ countryIsoCode: config.countryCode, metadata });
+    } else {
+      return phoneNationalGenerator({ countryIsoCode: config.countryCode, metadata });
+    }
   });
 
   private value = signal('');
@@ -46,11 +58,25 @@ export class PhoneInput implements ControlValueAccessor {
     }
 
     effect(() => this.maskito.options.set(this.mask()));
-    effect(() => this.onChange(this.value()));
+    effect(() => this.onChange(this.phoneStateData.phone()));
+    effect(() => {
+      const value = this.value();
+      untracked(() => this.phoneStateData.setInput(value));
+    })
+    effect(() => {
+      const config = this.config();
+      untracked(() => this.phoneStateData.setConfig(config));
+    })
+    effect(() => {
+      const inputReset = this.phoneStateData.inputReset();
+      if (inputReset) {
+        this.reset();
+      }
+    })
   }
 
   writeValue(value: string | null): void {
-    this.value.set(value ? value.replace(/[^\d+]/g, '') : '');
+    this.value.set(value ? value : '');
   }
 
   registerOnChange(fn: (value: string) => void): void {
@@ -68,6 +94,6 @@ export class PhoneInput implements ControlValueAccessor {
 
   private reset(): void {
     const element = this.elementRef.nativeElement;
-    this.writeValue(element.value);
+    element.value = '';
   }
 }

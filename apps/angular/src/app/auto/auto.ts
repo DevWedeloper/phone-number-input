@@ -28,7 +28,7 @@ export class Auto {
   protected value = signal('');
 
   constructor() {
-    effect(() => console.log('Phone value:', this.value()));
+    // effect(() => console.log('Phone value:', this.value()));
   }
 
   protected onChange(event: Event): void {

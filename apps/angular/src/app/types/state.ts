@@ -1,5 +1,7 @@
 import { CountryCode } from 'libphonenumber-js'
 
+export type Mode = 'auto' | 'international' | 'national'
+
 interface BasePhoneState {
   input: string
 }
@@ -7,7 +9,7 @@ interface BasePhoneState {
 interface PhoneStateAuto extends BasePhoneState {
   mode: 'auto'
   country: CountryCode | null
-  countryContext: 'user-selected' | 'auto-detected' | 'provided'
+  countryContext: 'none' | 'user-selected' | 'auto-detected' | 'provided'
 }
 
 interface PhoneStateWithCountry extends BasePhoneState {
