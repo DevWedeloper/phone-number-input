@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AsYouType, CountryCode, getCountryCallingCode } from 'libphonenumber-js/core';
+import { AsYouType, CountryCode } from 'libphonenumber-js/core';
 import metadata from 'libphonenumber-js/min/metadata';
 import { Mode } from './types/state';
 import { PhoneInputConfig } from './types/config';
-import { combineLatest, concat, delay, distinctUntilChanged, filter, map, merge, of, pairwise, scan, shareReplay, Subject, switchMap, tap } from 'rxjs';
+import { combineLatest, distinctUntilChanged, map, merge, scan, shareReplay, Subject } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { formatNationalPhone, handleCountrySelect } from './utils';
 
@@ -33,19 +33,21 @@ export class PhoneStateData {
 
         let next = {
           ...prev,
+          resetInput: false,
           mode,
         };
 
-        // --- Handle base events ---
         if (action === 'input') {
           next = { ...next, input: value };
         } else if (action === 'country-select') {
           next = { ...next, country: value, phone: value ? next.phone : '', input: value ? next.input : '' };
         }
 
-        // --- Mode: AUTO ---
+        if (action === 'country-select' && prev.country !== next.country) {
+          next = { ...next, resetInput: true };
+        }
+
         if (mode === 'auto') {
-          // Country selection forces national mode
           if (action === 'country-select') {
             next = {
               ...next,
@@ -54,7 +56,6 @@ export class PhoneStateData {
             };
           }
 
-          // Leading "+" forces international mode
           if (next.input.startsWith('+')) {
             next = {
               ...next,
@@ -62,7 +63,10 @@ export class PhoneStateData {
             };
           }
 
-          // --- Derived: INTERNATIONAL ---
+          if (prev.derivedMode !== next.derivedMode) {
+            next = { ...next, resetInput: true };
+          }
+
           if (next.derivedMode === 'international') {
             const formatter = new AsYouType(
               { defaultCountry: undefined },
@@ -119,6 +123,7 @@ export class PhoneStateData {
         input: '',
         country: null as CountryCode | null,
         phone: '',
+        resetInput: false
       }
     ),
     shareReplay({ refCount: true, bufferSize: 1 })
@@ -133,13 +138,8 @@ export class PhoneStateData {
   private countryAndDerivedMode$ = this.state$.pipe(
     map((state) => ({ country: state.country, derivedMode: state.derivedMode }))
   )
-  private inputReset$ = this.countrySelect$.pipe(
-    switchMap(() =>
-      concat(
-        of(true),
-        of(false).pipe(delay(0))
-      )
-    )
+  private inputReset$ = this.state$.pipe(
+    map((state) => state.resetInput),
   );
   
   phone = toSignal(this.phone$, { initialValue: '' });
@@ -149,10 +149,6 @@ export class PhoneStateData {
     derivedMode: 'international'
   } });
   inputReset = toSignal(this.inputReset$, { initialValue: false });
-
-  constructor() {
-    this.state$.subscribe((state) => console.log('State:', state));
-  }
 
   setInput(input: string): void {
     this.input$.next(input);
