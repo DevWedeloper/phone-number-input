@@ -82,7 +82,6 @@ export class PhoneStateData {
             };
           }
 
-          // --- Derived: NATIONAL ---
           if (next.derivedMode === 'national' && next.country) {
             next = { ...next, phone: formatNationalPhone(next.input, next.country, metadata) };
           }
