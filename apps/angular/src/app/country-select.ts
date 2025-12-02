@@ -47,6 +47,14 @@ import { PhoneStateData } from './phone-state-data';
         />
 
         <div class="overflow-y-auto max-h-56">
+          <button
+            class="px-3 py-2 cursor-pointer block"
+            (click)="choose()"
+            countryCodeTrigger
+            [countryCode]="null"
+          >
+            <span class="ml-2">Select country</span>
+          </button>
           @for (country of filtered(); track $index) {
             <button
               class="px-3 py-2 cursor-pointer block"

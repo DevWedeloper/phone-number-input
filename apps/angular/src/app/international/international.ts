@@ -28,7 +28,6 @@ export class International {
   protected config: PhoneInputConfig = {
     mode: 'international',
     countryCode: 'PH',
-    allowCountryChange: false,
   };
 
   protected value = signal('');

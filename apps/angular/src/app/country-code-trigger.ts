@@ -11,7 +11,7 @@ import { PhoneStateData } from './phone-state-data';
 export class CountryCodeTrigger {
   private PhoneStateData = inject(PhoneStateData);
 
-  countryCode = input.required<CountryCode>();
+  countryCode = input.required<CountryCode | null>();
 
   protected onClick(): void {
     this.PhoneStateData.setCountry(this.countryCode());

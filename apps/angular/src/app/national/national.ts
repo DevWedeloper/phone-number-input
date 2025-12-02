@@ -28,12 +28,11 @@ export class National {
   protected config: PhoneInputConfig = {
     mode: 'national',
     countryCode: 'PH',
-    allowCountryChange: false,
   };
 
   protected value = signal('');
 
   constructor() {
-    effect(() => console.log('Phone value:', this.value()));
+    // effect(() => console.log('Phone value:', this.value()));
   }
 }

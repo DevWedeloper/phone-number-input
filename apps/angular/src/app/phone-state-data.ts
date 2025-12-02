@@ -5,6 +5,7 @@ import { Mode } from './types/state';
 import { PhoneInputConfig } from './types/config';
 import { combineLatest, concat, delay, distinctUntilChanged, filter, map, merge, of, pairwise, scan, shareReplay, Subject, switchMap, tap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { formatNationalPhone, handleCountrySelect } from './utils';
 
 @Injectable()
 export class PhoneStateData {
@@ -39,7 +40,7 @@ export class PhoneStateData {
         if (action === 'input') {
           next = { ...next, input: value };
         } else if (action === 'country-select') {
-          next = { ...next, country: value };
+          next = { ...next, country: value, phone: value ? next.phone : '', input: value ? next.input : '' };
         }
 
         // --- Mode: AUTO ---
@@ -48,7 +49,7 @@ export class PhoneStateData {
           if (action === 'country-select') {
             next = {
               ...next,
-              derivedMode: 'national',
+              derivedMode: value ? 'national' : 'international',
               input: '',
             };
           }
@@ -79,21 +80,11 @@ export class PhoneStateData {
 
           // --- Derived: NATIONAL ---
           if (next.derivedMode === 'national' && next.country) {
-            // If no input → phone should be empty
-            if (!next.input.trim()) {
-              next = { ...next, phone: '' };
-            } else {
-              const prefix = `+${getCountryCallingCode(next.country, metadata)}`;
-              next = {
-                ...next,
-                phone: prefix + next.input.replace(/[^\d+]/g, ''),
-              };
-            }
+            next = { ...next, phone: formatNationalPhone(next.input, next.country, metadata) };
           }
         }
 
         if (mode === 'international') {
-          // Always start from a consistent international baseline
           next = {
             ...next,
             derivedMode: 'international',
@@ -102,52 +93,22 @@ export class PhoneStateData {
           };  
 
           if (action === 'country-select') {
-            // If country change is NOT allowed → force back to config country
-            if (config.allowCountryChange === false) {
-              next = { ...next, country: config.countryCode };
-            } else {
-              // Country change allowed → reset input
-              const isNewCountry = prev.country !== value;
-
-              next = {
-                ...next,
-                country: value,
-                input: isNewCountry ? '' : next.input,
-              };
-            }
+            next = handleCountrySelect(prev.country, next, value, config);
           }
         }
         
         if (mode === 'national') {
-          // Keep state consistent for national mode
+          const country = next.country ?? config.countryCode;
+
           next = {
             ...next,
             derivedMode: 'national',
-            country: next.country ?? config.countryCode,
+            country,
+            phone: formatNationalPhone(next.input, country, metadata),
           };
 
-          // Compute phone only if input is not empty
-          const sanitized = next.input.replace(/[^\d]/g, '');
-          if (sanitized.trim()) {
-            const prefix = `+${getCountryCallingCode(next.country!, metadata)}`;
-            next = { ...next, phone: prefix + sanitized };
-          } else {
-            next = { ...next, phone: '' };
-          }
-
           if (action === 'country-select') {
-            if (config.allowCountryChange === false) {
-              // Force country back to configured default
-              next = { ...next, country: config.countryCode };
-            } else {
-              const isNewCountry = prev.country !== value;
-
-              next = {
-                ...next,
-                country: value,
-                input: isNewCountry ? '' : next.input,
-              };
-            }
+            next = handleCountrySelect(prev.country, next, value, config);
           }
         }
 
