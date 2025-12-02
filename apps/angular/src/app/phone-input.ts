@@ -38,9 +38,9 @@ export class PhoneInput implements ControlValueAccessor {
         return phoneAutoGenerator({ isInitialModeInternational: false, metadata, countryIsoCode: country! }); // handle strict mode better
       }
     } else if (config.mode === 'international') {
-      return phoneInternationalGenerator({ countryIsoCode: config.countryCode, metadata });
+      return phoneInternationalGenerator({ countryIsoCode: country || config.countryCode, metadata });
     } else {
-      return phoneNationalGenerator({ countryIsoCode: config.countryCode, metadata });
+      return phoneNationalGenerator({ countryIsoCode: country || config.countryCode, metadata });
     }
   });
 

@@ -1,25 +1,39 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {MaskitoDirective} from '@maskito/angular';
-import { phoneNationalGenerator } from '../phone';
-import metadata from 'libphonenumber-js/min/metadata';
+import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CountrySelect } from '../country-select';
+import { PhoneField } from '../phone-field';
+import { PhoneInput } from '../phone-input';
+import { PhoneInputConfig } from '../types/config';
 
 @Component({
   selector: 'app-national',
-  imports: [MaskitoDirective],
+  imports: [PhoneField, PhoneInput, CountrySelect, FormsModule],
   template: `
-    <input
-      class="border-border border rounded-sm"
-      type="tel"
-      placeholder="National..."
-      [maskito]="mask"
-      autocomplete="tel"
-    />
+    <phone-field> 
+      <country-select />
+      <input
+        class="border-border border rounded-sm"
+        type="tel"
+        placeholder="National..."
+        autocomplete="tel"
+        phoneInput
+        [config]="config"
+        [(ngModel)]="value"
+      />
+    </phone-field>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class National {
-  protected mask = phoneNationalGenerator({
-    countryIsoCode: 'PH',
-    metadata,
-});
+  protected config: PhoneInputConfig = {
+    mode: 'national',
+    countryCode: 'PH',
+    allowCountryChange: false,
+  };
+
+  protected value = signal('');
+
+  constructor() {
+    effect(() => console.log('Phone value:', this.value()));
+  }
 }

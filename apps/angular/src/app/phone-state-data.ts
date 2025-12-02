@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AsYouType, CountryCode, getCountryCallingCode } from 'libphonenumber-js/core';
 import metadata from 'libphonenumber-js/min/metadata';
-import { Mode, PhoneState } from './types/state';
+import { Mode } from './types/state';
 import { PhoneInputConfig } from './types/config';
-import { combineLatest, concat, delay, distinctUntilChanged, distinctUntilKeyChanged, map, merge, of, pairwise, scan, shareReplay, startWith, Subject, switchMap } from 'rxjs';
+import { combineLatest, concat, delay, distinctUntilChanged, filter, map, merge, of, pairwise, scan, shareReplay, Subject, switchMap, tap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable()
@@ -26,7 +26,8 @@ export class PhoneStateData {
   ]).pipe(
     scan(
       (prev, curr) => {
-        const [{ mode }, event] = curr;
+        const [config, event] = curr;
+        const { mode } = config;
         const { action, value } = event;
 
         let next = {
@@ -82,16 +83,73 @@ export class PhoneStateData {
             if (!next.input.trim()) {
               next = { ...next, phone: '' };
             } else {
-              const cc = getCountryCallingCode(next.country, metadata);
+              const prefix = `+${getCountryCallingCode(next.country, metadata)}`;
               next = {
                 ...next,
-                phone: cc + next.input.replace(/[^\d+]/g, ''),
+                phone: prefix + next.input.replace(/[^\d+]/g, ''),
               };
             }
           }
         }
 
-        // TODO: handle mode === 'international' or 'national'
+        if (mode === 'international') {
+          // Always start from a consistent international baseline
+          next = {
+            ...next,
+            derivedMode: 'international',
+            country: next.country ?? config.countryCode,
+            phone: next.input.replace(/[^\d+]/g, ''),
+          };  
+
+          if (action === 'country-select') {
+            // If country change is NOT allowed → force back to config country
+            if (config.allowCountryChange === false) {
+              next = { ...next, country: config.countryCode };
+            } else {
+              // Country change allowed → reset input
+              const isNewCountry = prev.country !== value;
+
+              next = {
+                ...next,
+                country: value,
+                input: isNewCountry ? '' : next.input,
+              };
+            }
+          }
+        }
+        
+        if (mode === 'national') {
+          // Keep state consistent for national mode
+          next = {
+            ...next,
+            derivedMode: 'national',
+            country: next.country ?? config.countryCode,
+          };
+
+          // Compute phone only if input is not empty
+          const sanitized = next.input.replace(/[^\d]/g, '');
+          if (sanitized.trim()) {
+            const prefix = `+${getCountryCallingCode(next.country!, metadata)}`;
+            next = { ...next, phone: prefix + sanitized };
+          } else {
+            next = { ...next, phone: '' };
+          }
+
+          if (action === 'country-select') {
+            if (config.allowCountryChange === false) {
+              // Force country back to configured default
+              next = { ...next, country: config.countryCode };
+            } else {
+              const isNewCountry = prev.country !== value;
+
+              next = {
+                ...next,
+                country: value,
+                input: isNewCountry ? '' : next.input,
+              };
+            }
+          }
+        }
 
         return next;
       }, {
@@ -132,9 +190,7 @@ export class PhoneStateData {
   inputReset = toSignal(this.inputReset$, { initialValue: false });
 
   constructor() {
-    this.state$.subscribe((state) => {
-      console.log(state);
-    })
+    this.state$.subscribe((state) => console.log('State:', state));
   }
 
   setInput(input: string): void {

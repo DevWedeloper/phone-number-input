@@ -18,4 +18,4 @@ interface PhoneStateWithCountry extends BasePhoneState {
   countryContext: 'provided'
 }
 
-export type PhoneState = PhoneStateAuto | PhoneStateWithCountry
+export type PhoneState = PhoneStateAuto | PhoneStateWithCountry // TODO: might remove this if im not using it

@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/cor
 import { PhoneInput } from '../phone-input';
 import { CountrySelect } from '../country-select';
 import { PhoneField } from '../phone-field';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-auto',
-  imports: [PhoneField, PhoneInput, CountrySelect],
+  imports: [PhoneField, PhoneInput, CountrySelect, FormsModule],
   host: {
     class: 'flex gap-4'
   },
@@ -18,7 +19,7 @@ import { PhoneField } from '../phone-field';
         placeholder="Auto..."
         autocomplete="tel"
         phoneInput
-        (input)="onChange($event)"
+        [(ngModel)]="value"
       />
     </phone-field>
   `,
@@ -29,10 +30,5 @@ export class Auto {
 
   constructor() {
     // effect(() => console.log('Phone value:', this.value()));
-  }
-
-  protected onChange(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    this.value.set(target.value);
   }
 }
