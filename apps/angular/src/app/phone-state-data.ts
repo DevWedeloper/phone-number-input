@@ -63,7 +63,7 @@ export class PhoneStateData {
             };
           }
 
-          if (prev.derivedMode !== next.derivedMode) {
+          if (prev.derivedMode === 'international' && next.derivedMode === 'national') {
             next = { ...next, resetInput: true };
           }
 
