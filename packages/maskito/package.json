@@ -1,0 +1,29 @@
+{
+  "name": "@phone-number-input/maskito",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc --watch"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "peerDependencies": {
+    "@maskito/core": "^4.0.1",
+    "@maskito/kit": "^4.0.1",
+    "@maskito/phone": "^4.0.1",
+    "libphonenumber-js": "^1.12.29"
+  },
+  "devDependencies": {
+    "@maskito/core": "^4.0.1",
+    "@maskito/kit": "^4.0.1",
+    "@maskito/phone": "^4.0.1",
+    "libphonenumber-js": "^1.12.29",
+    "typescript": "~5.9.2"
+  }
+}

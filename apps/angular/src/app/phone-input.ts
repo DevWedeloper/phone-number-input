@@ -1,6 +1,6 @@
 import { computed, Directive, effect, ElementRef, forwardRef, inject, input, isDevMode, signal, untracked } from '@angular/core';
 import { MaskitoDirective } from '@maskito/angular';
-import { phoneAutoGenerator, phoneInternationalGenerator, phoneNationalGenerator } from './phone';
+import { phoneAutoGenerator, phoneInternationalGenerator, phoneNationalGenerator } from '@phone-number-input/maskito';
 import metadata from 'libphonenumber-js/min/metadata';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PhoneInputConfig } from './types/config';
