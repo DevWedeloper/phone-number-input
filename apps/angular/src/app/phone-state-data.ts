@@ -144,10 +144,6 @@ export class PhoneStateData {
   } });
   inputReset = toSignal(this.inputReset$, { initialValue: false });
 
-  constructor() {
-    this.state$.subscribe(console.log)
-  }
-
   setInput(input: string): void {
     this.input$.next(input);
   }
