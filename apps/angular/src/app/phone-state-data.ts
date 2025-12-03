@@ -3,7 +3,7 @@ import { AsYouType, CountryCode } from 'libphonenumber-js/core';
 import metadata from 'libphonenumber-js/min/metadata';
 import { Mode } from './types/state';
 import { PhoneInputConfig } from './types/config';
-import { combineLatest, distinctUntilChanged, map, merge, scan, shareReplay, Subject } from 'rxjs';
+import { combineLatest, map, merge, scan, shareReplay, Subject } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { formatNationalPhone, handleCountrySelect } from './utils';
 
@@ -13,16 +13,11 @@ export class PhoneStateData {
   private config$ = new Subject<PhoneInputConfig>();
   private setSelectedCountry$ = new Subject<CountryCode | null>();
 
-  private countrySelect$ = this.setSelectedCountry$.pipe(
-    distinctUntilChanged(),
-    shareReplay({ bufferSize: 1, refCount: true })
-  );
-
   private state$ = combineLatest([
     this.config$,
     merge(
       this.input$.pipe(map((value) => ({ action: 'input' as const, value }))), 
-      this.countrySelect$.pipe(map((value) => ({ action: 'country-select' as const, value }))), 
+      this.setSelectedCountry$.pipe(map((value) => ({ action: 'country-select' as const, value }))), 
     )
   ]).pipe(
     scan(
@@ -148,6 +143,10 @@ export class PhoneStateData {
     derivedMode: 'international'
   } });
   inputReset = toSignal(this.inputReset$, { initialValue: false });
+
+  constructor() {
+    this.state$.subscribe(console.log)
+  }
 
   setInput(input: string): void {
     this.input$.next(input);
