@@ -32,10 +32,10 @@ export class PhoneInput implements ControlValueAccessor {
     const { country, derivedMode } = this.phoneStateData.countryAndDerivedMode();
 
     if (config.mode === 'auto') {
-      if (derivedMode === 'international') {
-        return phoneAutoGenerator({ isInitialModeInternational: true, metadata });
+      if (derivedMode === 'national' && country) {
+        return phoneAutoGenerator({ isInitialModeInternational: false, metadata, countryIsoCode: country });
       } else {
-        return phoneAutoGenerator({ isInitialModeInternational: false, metadata, countryIsoCode: country! });
+        return phoneAutoGenerator({ isInitialModeInternational: true, metadata });
       }
     } else if (config.mode === 'international') {
       return phoneInternationalGenerator({ countryIsoCode: country || config.countryCode, metadata });
