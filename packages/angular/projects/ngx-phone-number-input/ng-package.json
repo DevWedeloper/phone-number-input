@@ -3,5 +3,8 @@
   "dest": "../../dist/ngx-phone-number-input",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "allowedNonPeerDependencies": [
+    "@phone-number-input/maskito"
+  ]
 }
