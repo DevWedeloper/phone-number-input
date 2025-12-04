@@ -76,7 +76,7 @@ import { CountryCodeTrigger, PhoneStateData } from 'ngx-phone-number-input';
 export class CountrySelect {
   private overlay = inject(Overlay);
   private vcr = inject(ViewContainerRef);
-  private PhoneStateData = inject(PhoneStateData);
+  private phoneStateData = inject(PhoneStateData);
 
   private dropdownPanel = viewChild.required<TemplateRef<any>>('dropdownPanel');
   private trigger = viewChild.required<ElementRef<HTMLButtonElement>>('trigger');
@@ -86,7 +86,7 @@ export class CountrySelect {
   private countries = getCountries();
   protected searchText = signal('');
   protected filtered = computed(() => this.countries.filter(c => c.toLowerCase().includes(this.searchText())));
-  protected selectedCountry = this.PhoneStateData.selectedCountry;
+  protected selectedCountry = this.phoneStateData.selectedCountry;
 
   protected openDropdown() {
     if (this.overlayRef) {
