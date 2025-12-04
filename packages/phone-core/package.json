@@ -1,0 +1,27 @@
+{
+  "name": "@phone-number-input/phone-core",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc --watch"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/types/index.js"
+    }
+  },
+  "peerDependencies": {
+    "libphonenumber-js": "^1.12.29"
+  },
+  "devDependencies": {
+    "libphonenumber-js": "^1.12.29",
+    "typescript": "~5.9.2"
+  }
+}
