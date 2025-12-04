@@ -157,21 +157,6 @@ importers:
       '@angular/compiler-cli':
         specifier: ^19.2.0
         version: 19.2.17(@angular/compiler@19.2.17)(typescript@5.7.3)
-      '@maskito/angular':
-        specifier: ^4.0.1
-        version: 4.0.1(@angular/core@19.2.17(rxjs@7.8.2)(zone.js@0.15.1))(@angular/forms@19.2.17(@angular/common@19.2.17(@angular/core@19.2.17(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.17(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@19.2.17(@angular/common@19.2.17(@angular/core@19.2.17(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.17(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2))(@maskito/core@4.0.1)
-      '@maskito/core':
-        specifier: ^4.0.1
-        version: 4.0.1
-      '@maskito/kit':
-        specifier: ^4.0.1
-        version: 4.0.1(@maskito/core@4.0.1)
-      '@maskito/phone':
-        specifier: ^4.0.1
-        version: 4.0.1(@maskito/core@4.0.1)(@maskito/kit@4.0.1(@maskito/core@4.0.1))(libphonenumber-js@1.12.31)
-      libphonenumber-js:
-        specifier: ^1.12.29
-        version: 1.12.31
       ng-packagr:
         specifier: ^19.2.0
         version: 19.2.2(@angular/compiler-cli@19.2.17(@angular/compiler@19.2.17)(typescript@5.7.3))(tailwindcss@4.1.17)(tslib@2.8.1)(typescript@5.7.3)
@@ -8139,13 +8124,6 @@ snapshots:
 
   '@lmdb/lmdb-win32-x64@3.4.3':
     optional: true
-
-  '@maskito/angular@4.0.1(@angular/core@19.2.17(rxjs@7.8.2)(zone.js@0.15.1))(@angular/forms@19.2.17(@angular/common@19.2.17(@angular/core@19.2.17(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.17(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@19.2.17(@angular/common@19.2.17(@angular/core@19.2.17(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.17(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2))(@maskito/core@4.0.1)':
-    dependencies:
-      '@angular/core': 19.2.17(rxjs@7.8.2)(zone.js@0.15.1)
-      '@angular/forms': 19.2.17(@angular/common@19.2.17(@angular/core@19.2.17(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.17(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@19.2.17(@angular/common@19.2.17(@angular/core@19.2.17(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@19.2.17(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2)
-      '@maskito/core': 4.0.1
-      tslib: 2.8.1
 
   '@maskito/angular@4.0.1(@angular/core@21.0.2(@angular/compiler@21.0.2)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/forms@21.0.2(@angular/common@21.0.2(@angular/core@21.0.2(@angular/compiler@21.0.2)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.0.2(@angular/compiler@21.0.2)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@21.0.2(@angular/common@21.0.2(@angular/core@21.0.2(@angular/compiler@21.0.2)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.0.2(@angular/compiler@21.0.2)(rxjs@7.8.2)(zone.js@0.15.1)))(@standard-schema/spec@1.0.0)(rxjs@7.8.2))(@maskito/core@4.0.1)':
     dependencies:
