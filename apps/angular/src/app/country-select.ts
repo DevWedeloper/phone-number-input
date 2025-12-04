@@ -13,11 +13,11 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 
 import { CountryCode, getCountries, getCountryCallingCode } from 'libphonenumber-js';
-import { CountryCodeTrigger } from './country-code-trigger';
-import { PhoneStateData } from './phone-state-data';
+import { CountryCodeTrigger, PhoneStateData } from '@phone-number-input/angular';
 
 @Component({
   selector: 'country-select',
+  standalone: true,
   imports: [CountryCodeTrigger],
   host: {
     class: 'inline-block relative border-border border rounded-sm w-10'
@@ -40,10 +40,11 @@ import { PhoneStateData } from './phone-state-data';
         class="flex flex-col border rounded-md bg-background"
       >
         <input
+          #searchInput
           type="text"
           placeholder="Search..."
           class="px-3 py-2 border-b outline-none"
-          (input)="searchText.set($event.target.value)"
+          (input)="searchText.set(searchInput.value)"
         />
 
         <div class="overflow-y-auto max-h-56">

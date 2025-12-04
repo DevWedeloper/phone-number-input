@@ -8,6 +8,7 @@ import { PhoneStateData } from './phone-state-data';
 
 @Directive({
   selector: 'input[phoneInput]',
+  standalone: true,
   host: {
     '(input)': 'onInput($event)',
   },

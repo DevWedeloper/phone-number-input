@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
-import { PhoneInput } from '../phone-input';
-import { CountrySelect } from '../country-select';
-import { PhoneField } from '../phone-field';
+import { PhoneField, PhoneInput } from '@phone-number-input/angular';
 import { FormsModule } from '@angular/forms';
+import { CountrySelect } from '../country-select';
 
 @Component({
   selector: 'app-auto',
   imports: [PhoneField, PhoneInput, CountrySelect, FormsModule],
+  standalone: true,
   host: {
     class: 'flex gap-4'
   },

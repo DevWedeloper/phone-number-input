@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CountrySelect } from '../country-select';
-import { PhoneField } from '../phone-field';
-import { PhoneInput } from '../phone-input';
-import { PhoneInputConfig } from '../types/config';
+import { PhoneField, PhoneInput, PhoneInputConfig } from '@phone-number-input/angular';
 
 @Component({
   selector: 'app-international',
+  standalone: true,
   imports: [PhoneField, PhoneInput, CountrySelect, FormsModule],
   template: `
     <phone-field> 

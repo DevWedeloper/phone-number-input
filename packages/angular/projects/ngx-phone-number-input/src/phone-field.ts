@@ -3,6 +3,7 @@ import { PhoneStateData } from './phone-state-data';
 
 @Component({
   selector: 'phone-field',
+  standalone: true,
   template: `
     <ng-content />
   `,
