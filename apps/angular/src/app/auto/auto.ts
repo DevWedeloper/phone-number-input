@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
-import { PhoneField, PhoneInput } from '@phone-number-input/angular';
+import { PhoneField, PhoneInput } from 'ngx-phone-number-input';
 import { FormsModule } from '@angular/forms';
 import { CountrySelect } from '../country-select';
 

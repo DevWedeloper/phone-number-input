@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CountrySelect } from '../country-select';
-import { PhoneField, PhoneInput, PhoneInputConfig } from '@phone-number-input/angular';
+import { PhoneField, PhoneInput, PhoneInputConfig } from 'ngx-phone-number-input';
 
 @Component({
   selector: 'app-national',

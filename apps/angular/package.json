@@ -41,7 +41,7 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "@phone-number-input/maskito": "workspace:*",
-    "@phone-number-input/angular": "workspace:*"
+    "ngx-phone-number-input": "file:../../packages/angular/dist/ngx-phone-number-input"
   },
   "devDependencies": {
     "@angular/build": "^21.0.0",

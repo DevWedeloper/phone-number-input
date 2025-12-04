@@ -13,7 +13,7 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 
 import { CountryCode, getCountries, getCountryCallingCode } from 'libphonenumber-js';
-import { CountryCodeTrigger, PhoneStateData } from '@phone-number-input/angular';
+import { CountryCodeTrigger, PhoneStateData } from 'ngx-phone-number-input';
 
 @Component({
   selector: 'country-select',
