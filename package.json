@@ -5,7 +5,8 @@
     "build": "turbo run build",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "start": "turbo run start"
+    "start": "turbo run start",
+    "watch": "turbo run watch"
   },
   "engines": {
     "node": ">=18"
