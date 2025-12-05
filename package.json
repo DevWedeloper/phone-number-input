@@ -1,20 +1,20 @@
 {
   "name": "phone-number-input",
   "private": true,
-  "scripts": {
-    "build": "turbo run build",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "start": "turbo run start",
-    "watch": "turbo run watch"
-  },
+  "packageManager": "pnpm@10.24.0",
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "pnpm@10.24.0",
+  "scripts": {
+    "build": "turbo run build",
+    "lint": "turbo run lint --continue",
+    "start": "turbo run start",
+    "watch": "turbo run watch"
+  },
   "devDependencies": {
-    "eslint": "^8.57.0",
-    "prettier": "^2.8.8",
+    "@antfu/eslint-config": "^6.4.2",
+    "eslint": "^9.37.0",
+    "eslint-plugin-format": "^1.0.2",
     "turbo": "^2.6.1"
   }
 }

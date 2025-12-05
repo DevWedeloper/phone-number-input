@@ -3,10 +3,6 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "build": "tsc",
-    "start": "tsc --watch"
-  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -17,10 +13,18 @@
       "default": "./dist/types/index.js"
     }
   },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "lint": "eslint . --max-warnings 0"
+  },
   "peerDependencies": {
     "libphonenumber-js": "^1.12.29"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^6.4.2",
+    "eslint": "^9.39.1",
+    "eslint-plugin-format": "^1.0.2",
     "libphonenumber-js": "^1.12.29",
     "typescript": "~5.9.2"
   }
