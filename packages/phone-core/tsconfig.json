@@ -5,6 +5,7 @@
     "rootDir": "src",
     "module": "esnext",
     "moduleResolution": "bundler",
+    "types": ["vitest/globals"],
     "strict": true,
     "declaration": true,
     "outDir": "dist"
