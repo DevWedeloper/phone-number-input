@@ -59,6 +59,9 @@
             }
           },
           "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@analogjs/vitest-angular:test"
         }
       }
     }
