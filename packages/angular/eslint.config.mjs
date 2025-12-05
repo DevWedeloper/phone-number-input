@@ -1,10 +1,11 @@
 import angularEslintPlugin from '@angular-eslint/eslint-plugin'
 import angularEslintTemplatePlugin from '@angular-eslint/eslint-plugin-template'
 import angularEslintTemplateParser from '@angular-eslint/template-parser'
-import { combine, ignores, imports, javascript, node, perfectionist, stylistic, typescript, unicorn } from '@antfu/eslint-config'
+import { combine, ignores, imports, javascript, jsonc, node, perfectionist, sortPackageJson, sortTsconfig, stylistic, typescript, unicorn } from '@antfu/eslint-config'
 import tsParser from '@typescript-eslint/parser'
 
 export default combine(
+  jsonc(),
   ignores(),
   javascript(),
   node(),
@@ -13,6 +14,8 @@ export default combine(
   typescript(),
   stylistic(),
   perfectionist(),
+  sortTsconfig(),
+  sortPackageJson(),
   {
     files: ['**/*.ts'],
     languageOptions: {
