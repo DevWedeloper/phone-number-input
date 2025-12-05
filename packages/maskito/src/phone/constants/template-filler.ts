@@ -1,1 +1,1 @@
-export const TEMPLATE_FILLER = 'x';
+export const TEMPLATE_FILLER = 'x'

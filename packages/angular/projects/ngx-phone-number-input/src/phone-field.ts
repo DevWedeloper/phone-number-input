@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PhoneStateData } from './phone-state-data';
+import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { PhoneStateData } from './phone-state-data'
 
 @Component({
   selector: 'phone-field',

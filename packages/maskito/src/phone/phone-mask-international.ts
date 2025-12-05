@@ -1,23 +1,24 @@
-import { type MaskitoOptions} from '@maskito/core';
-import {maskitoPhoneOptionsGenerator} from '@maskito/phone';
-import {CountryCode, getCountryCallingCode, MetadataJson} from 'libphonenumber-js/core';
-import { applyPrefix } from './plugins';
-    
-export function phoneInternationalGenerator({countryIsoCode, metadata}: {countryIsoCode: CountryCode; metadata: MetadataJson}): Required<MaskitoOptions> {
-    const code = getCountryCallingCode(countryIsoCode, metadata);
-    const prefix = `+${code} `;
+import type { MaskitoOptions } from '@maskito/core'
+import type { CountryCode, MetadataJson } from 'libphonenumber-js/core'
+import { maskitoPhoneOptionsGenerator } from '@maskito/phone'
+import { getCountryCallingCode } from 'libphonenumber-js/core'
+import { applyPrefix } from './plugins'
 
-    const phoneOptions = maskitoPhoneOptionsGenerator({
-        metadata,
-        countryIsoCode,
-        strict: true,
-    });
+export function phoneInternationalGenerator({ countryIsoCode, metadata}: { countryIsoCode: CountryCode, metadata: MetadataJson }): Required<MaskitoOptions> {
+  const code = getCountryCallingCode(countryIsoCode, metadata)
+  const prefix = `+${code} `
 
-    return {
-        ...phoneOptions,
-        plugins: [
-            ...phoneOptions.plugins,
-            applyPrefix(prefix),
-        ],
-    } satisfies MaskitoOptions;
+  const phoneOptions = maskitoPhoneOptionsGenerator({
+    metadata,
+    countryIsoCode,
+    strict: true,
+  })
+
+  return {
+    ...phoneOptions,
+    plugins: [
+      ...phoneOptions.plugins,
+      applyPrefix(prefix),
+    ],
+  } satisfies MaskitoOptions
 }

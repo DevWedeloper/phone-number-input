@@ -1,37 +1,38 @@
-import { AsYouType } from 'libphonenumber-js/core';
-import metadata from 'libphonenumber-js/min/metadata';
-import { PhoneInputConfig } from './types/config';
-import { formatNationalPhone, handleCountrySelect } from './utils';
-import { PhoneEvent } from './types/event';
-import { PhoneState } from './types/state';
+import type { PhoneInputConfig } from './types/config'
+import type { PhoneEvent } from './types/event'
+import type { PhoneState } from './types/state'
+import { AsYouType } from 'libphonenumber-js/core'
+import metadata from 'libphonenumber-js/min/metadata'
+import { formatNationalPhone, handleCountrySelect } from './utils'
 
 export function updatePhoneState(
   prev: PhoneState,
   config: PhoneInputConfig,
-  event: PhoneEvent
+  event: PhoneEvent,
 ): PhoneState {
-  const { mode } = config;
-  const { action, value } = event;
+  const { mode } = config
+  const { action, value } = event
 
   let next: PhoneState = {
     ...prev,
     resetInput: false,
     mode,
-  };
+  }
 
   if (action === 'input') {
-    next = { ...next, input: value };
-  } else if (action === 'country-select') {
+    next = { ...next, input: value }
+  }
+  else if (action === 'country-select') {
     next = {
       ...next,
       country: value,
       phone: value ? next.phone : '',
       input: value ? next.input : '',
-    };
+    }
   }
 
   if (action === 'country-select' && prev.country !== next.country) {
-    next = { ...next, resetInput: true };
+    next = { ...next, resetInput: true }
   }
 
   if (mode === 'auto') {
@@ -40,33 +41,33 @@ export function updatePhoneState(
         ...next,
         derivedMode: value ? 'national' : 'international',
         input: '',
-      };
+      }
     }
 
     if (next.input.startsWith('+')) {
-      next = { ...next, derivedMode: 'international' };
+      next = { ...next, derivedMode: 'international' }
     }
 
     if (prev.derivedMode === 'international' && next.derivedMode === 'national') {
-      next = { ...next, resetInput: true };
+      next = { ...next, resetInput: true }
     }
 
     if (next.derivedMode === 'international') {
-      const formatter = new AsYouType({ defaultCountry: undefined }, metadata);
-      formatter.input(next.input);
+      const formatter = new AsYouType({ defaultCountry: undefined }, metadata)
+      formatter.input(next.input)
 
       next = {
         ...next,
         country: formatter.getCountry() ?? null,
         phone: next.input.replace(/[^\d+]/g, ''),
-      };
+      }
     }
 
     if (next.derivedMode === 'national' && next.country) {
       next = {
         ...next,
         phone: formatNationalPhone(next.input, next.country, metadata),
-      };
+      }
     }
   }
 
@@ -76,27 +77,27 @@ export function updatePhoneState(
       derivedMode: 'international',
       country: next.country ?? config.countryCode,
       phone: next.input.replace(/[^\d+]/g, ''),
-    };
+    }
 
     if (action === 'country-select') {
-      next = handleCountrySelect(prev.country, next, value, config);
+      next = handleCountrySelect(prev.country, next, value, config)
     }
   }
 
   if (mode === 'national') {
-    const country = next.country ?? config.countryCode;
+    const country = next.country ?? config.countryCode
 
     next = {
       ...next,
       derivedMode: 'national',
       country,
       phone: formatNationalPhone(next.input, country, metadata),
-    };
+    }
 
     if (action === 'country-select') {
-      next = handleCountrySelect(prev.country, next, value, config);
+      next = handleCountrySelect(prev.country, next, value, config)
     }
   }
 
-  return next;
+  return next
 }
