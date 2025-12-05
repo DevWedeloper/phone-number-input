@@ -3,8 +3,8 @@ import { MaskitoDirective } from '@maskito/angular';
 import { phoneAutoGenerator, phoneInternationalGenerator, phoneNationalGenerator } from '@phone-number-input/maskito';
 import metadata from 'libphonenumber-js/min/metadata';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { PhoneInputConfig } from './types/config';
 import { PhoneStateData } from './phone-state-data';
+import { PhoneInputConfig } from '@phone-number-input/phone-core';
 
 @Directive({
   selector: 'input[phoneInput]',

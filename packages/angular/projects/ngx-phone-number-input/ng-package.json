@@ -5,6 +5,7 @@
     "entryFile": "src/public-api.ts"
   },
   "allowedNonPeerDependencies": [
-    "@phone-number-input/maskito"
+    "@phone-number-input/maskito",
+    "@phone-number-input/phone-core"
   ]
 }
