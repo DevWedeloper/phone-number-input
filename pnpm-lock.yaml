@@ -181,7 +181,7 @@ importers:
       '@phone-number-input/maskito':
         specifier: workspace:*
         version: link:../maskito
-      '@phone-number-input/phone-core':
+      '@phone-number-input/core':
         specifier: workspace:*
         version: link:../core
       eslint:
@@ -13794,7 +13794,7 @@ snapshots:
       '@maskito/kit': 4.0.1(@maskito/core@4.0.1)
       '@maskito/phone': 4.0.1(@maskito/core@4.0.1)(@maskito/kit@4.0.1(@maskito/core@4.0.1))(libphonenumber-js@1.12.31)
       '@phone-number-input/maskito': link:packages/maskito
-      '@phone-number-input/phone-core': link:packages/core
+      '@phone-number-input/core': link:packages/core
       libphonenumber-js: 1.12.31
       tslib: 2.8.1
 

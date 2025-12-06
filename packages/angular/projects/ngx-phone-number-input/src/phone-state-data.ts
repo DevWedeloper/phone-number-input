@@ -1,8 +1,8 @@
-import type { Mode, PhoneInputConfig } from '@phone-number-input/phone-core'
+import type { Mode, PhoneInputConfig } from '@phone-number-input/core'
 import type { CountryCode } from 'libphonenumber-js/core'
 import { Injectable } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
-import { updatePhoneState } from '@phone-number-input/phone-core'
+import { updatePhoneState } from '@phone-number-input/core'
 import { combineLatest, map, merge, scan, shareReplay, Subject } from 'rxjs'
 
 @Injectable()

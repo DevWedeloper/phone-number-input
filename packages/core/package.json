@@ -1,5 +1,5 @@
 {
-  "name": "@phone-number-input/phone-core",
+  "name": "@phone-number-input/core",
   "type": "module",
   "version": "0.0.0",
   "private": true,

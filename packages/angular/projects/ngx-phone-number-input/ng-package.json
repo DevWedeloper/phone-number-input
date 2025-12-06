@@ -6,6 +6,6 @@
   },
   "allowedNonPeerDependencies": [
     "@phone-number-input/maskito",
-    "@phone-number-input/phone-core"
+    "@phone-number-input/core"
   ]
 }

@@ -1,5 +1,5 @@
 import type { ControlValueAccessor } from '@angular/forms'
-import type { PhoneInputConfig } from '@phone-number-input/phone-core'
+import type { PhoneInputConfig } from '@phone-number-input/core'
 import { computed, Directive, effect, ElementRef, forwardRef, inject, input, isDevMode, signal, untracked } from '@angular/core'
 import { NG_VALUE_ACCESSOR } from '@angular/forms'
 import { MaskitoDirective } from '@maskito/angular'
