@@ -41,6 +41,12 @@ describe('phone-mask-national', () => {
       expect(input.value).toBe('212 555-1234')
     })
 
+    it('trims extra digits when pasting too-long number', async () => {
+      await user.click(input)
+      await userEvent.paste('212555123400000')
+      expect(input.value).toBe('212 555-1234')
+    })
+
     it('should not allow more digits when number is complete', async () => {
       await user.type(input, '2125551234444444')
       expect(input.value).toBe('212 555-1234')

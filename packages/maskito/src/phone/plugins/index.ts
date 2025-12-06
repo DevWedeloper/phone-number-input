@@ -1,1 +1,1 @@
-export * from './apply-prefix'
+export * from './apply-prefix-initially'
