@@ -178,12 +178,12 @@ importers:
       '@maskito/angular':
         specifier: ^4.0.1
         version: 4.0.1(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(@angular/forms@17.3.12(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(@angular/platform-browser@17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(rxjs@7.8.2))(@maskito/core@4.0.1)
-      '@phone-number-input/maskito':
-        specifier: workspace:*
-        version: link:../maskito
       '@phone-number-input/core':
         specifier: workspace:*
         version: link:../core
+      '@phone-number-input/maskito':
+        specifier: workspace:*
+        version: link:../maskito
       eslint:
         specifier: ^9.39.1
         version: 9.39.1(jiti@2.6.1)
@@ -13793,8 +13793,8 @@ snapshots:
       '@maskito/core': 4.0.1
       '@maskito/kit': 4.0.1(@maskito/core@4.0.1)
       '@maskito/phone': 4.0.1(@maskito/core@4.0.1)(@maskito/kit@4.0.1(@maskito/core@4.0.1))(libphonenumber-js@1.12.31)
-      '@phone-number-input/maskito': link:packages/maskito
       '@phone-number-input/core': link:packages/core
+      '@phone-number-input/maskito': link:packages/maskito
       libphonenumber-js: 1.12.31
       tslib: 2.8.1
 

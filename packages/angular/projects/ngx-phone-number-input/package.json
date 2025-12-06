@@ -12,8 +12,8 @@
     "libphonenumber-js": "^1.12.29"
   },
   "dependencies": {
-    "@phone-number-input/maskito": "workspace:*",
     "@phone-number-input/core": "workspace:*",
+    "@phone-number-input/maskito": "workspace:*",
     "tslib": "^2.3.0"
   }
 }
