@@ -1,6 +1,6 @@
 import type { CountryCode } from 'libphonenumber-js/core'
 
-export function handleCountrySelect<T extends { country: CountryCode | null, input: string }>(
+export function handleCountrySelect<T extends { country: CountryCode | null, input: string, phone: string }>(
   prevCountry: CountryCode | null,
   current: T,
   value: CountryCode | null,
@@ -14,5 +14,6 @@ export function handleCountrySelect<T extends { country: CountryCode | null, inp
     ...current,
     country: value,
     input: prevCountry !== value ? '' : current.input,
+    phone: prevCountry !== value ? '' : current.phone,
   }
 }

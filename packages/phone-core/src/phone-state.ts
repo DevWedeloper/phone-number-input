@@ -23,12 +23,7 @@ export function updatePhoneState(
     next = { ...next, input: value }
   }
   else if (action === 'country-select') {
-    next = {
-      ...next,
-      country: value,
-      phone: value ? next.phone : '',
-      input: value ? next.input : '',
-    }
+    next = { ...next, country: value }
   }
 
   if (action === 'country-select' && prev.country !== next.country) {
