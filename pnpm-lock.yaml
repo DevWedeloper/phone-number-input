@@ -183,7 +183,7 @@ importers:
         version: link:../maskito
       '@phone-number-input/phone-core':
         specifier: workspace:*
-        version: link:../phone-core
+        version: link:../core
       eslint:
         specifier: ^9.39.1
         version: 9.39.1(jiti@2.6.1)
@@ -208,6 +208,30 @@ importers:
       vitest:
         specifier: ^4.0.15
         version: 4.0.15(@types/node@20.19.25)(jiti@2.6.1)(jsdom@27.2.0)(less@4.2.0)(lightningcss@1.30.2)(sass@1.71.1)(terser@5.29.1)(yaml@2.8.2)
+
+  packages/core:
+    devDependencies:
+      '@antfu/eslint-config':
+        specifier: ^6.4.2
+        version: 6.4.2(@vue/compiler-sfc@3.5.25)(eslint-plugin-format@1.1.0(eslint@9.39.1(jiti@2.6.1)))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.15(@types/node@20.19.25)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(lightningcss@1.30.2)(sass@1.94.2)(terser@5.44.1)(yaml@2.8.2))
+      eslint:
+        specifier: ^9.39.1
+        version: 9.39.1(jiti@2.6.1)
+      eslint-plugin-format:
+        specifier: ^1.0.2
+        version: 1.1.0(eslint@9.39.1(jiti@2.6.1))
+      libphonenumber-js:
+        specifier: ^1.12.29
+        version: 1.12.31
+      typescript:
+        specifier: ~5.9.2
+        version: 5.9.3
+      vite:
+        specifier: ^7.2.6
+        version: 7.2.6(@types/node@20.19.25)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass@1.94.2)(terser@5.44.1)(yaml@2.8.2)
+      vitest:
+        specifier: ^4.0.15
+        version: 4.0.15(@types/node@20.19.25)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(lightningcss@1.30.2)(sass@1.94.2)(terser@5.44.1)(yaml@2.8.2)
 
   packages/maskito:
     devDependencies:
@@ -238,30 +262,6 @@ importers:
       jsdom:
         specifier: ^27.2.0
         version: 27.2.0
-      libphonenumber-js:
-        specifier: ^1.12.29
-        version: 1.12.31
-      typescript:
-        specifier: ~5.9.2
-        version: 5.9.3
-      vite:
-        specifier: ^7.2.6
-        version: 7.2.6(@types/node@20.19.25)(jiti@2.6.1)(less@4.4.2)(lightningcss@1.30.2)(sass@1.94.2)(terser@5.44.1)(yaml@2.8.2)
-      vitest:
-        specifier: ^4.0.15
-        version: 4.0.15(@types/node@20.19.25)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(lightningcss@1.30.2)(sass@1.94.2)(terser@5.44.1)(yaml@2.8.2)
-
-  packages/phone-core:
-    devDependencies:
-      '@antfu/eslint-config':
-        specifier: ^6.4.2
-        version: 6.4.2(@vue/compiler-sfc@3.5.25)(eslint-plugin-format@1.1.0(eslint@9.39.1(jiti@2.6.1)))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.15(@types/node@20.19.25)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(lightningcss@1.30.2)(sass@1.94.2)(terser@5.44.1)(yaml@2.8.2))
-      eslint:
-        specifier: ^9.39.1
-        version: 9.39.1(jiti@2.6.1)
-      eslint-plugin-format:
-        specifier: ^1.0.2
-        version: 1.1.0(eslint@9.39.1(jiti@2.6.1))
       libphonenumber-js:
         specifier: ^1.12.29
         version: 1.12.31
@@ -13794,7 +13794,7 @@ snapshots:
       '@maskito/kit': 4.0.1(@maskito/core@4.0.1)
       '@maskito/phone': 4.0.1(@maskito/core@4.0.1)(@maskito/kit@4.0.1(@maskito/core@4.0.1))(libphonenumber-js@1.12.31)
       '@phone-number-input/maskito': link:packages/maskito
-      '@phone-number-input/phone-core': link:packages/phone-core
+      '@phone-number-input/phone-core': link:packages/core
       libphonenumber-js: 1.12.31
       tslib: 2.8.1
 
