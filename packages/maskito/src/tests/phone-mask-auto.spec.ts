@@ -1,0 +1,56 @@
+import { Maskito } from '@maskito/core'
+import userEvent from '@testing-library/user-event'
+import metadata from 'libphonenumber-js/min/metadata'
+import { phoneAutoGenerator } from '../phone'
+
+describe('phone-mask-auto', () => {
+  let input: HTMLInputElement
+  let maskedInput: Maskito
+  const user = userEvent.setup()
+
+  const setup = ({ isInternational}: { isInternational: boolean }) => {
+    const maskitoInternationalOptions = phoneAutoGenerator({ isInitialModeInternational: true, metadata })
+    const maskitoNationalOptions = phoneAutoGenerator({ isInitialModeInternational: false, countryIsoCode: 'US', metadata })
+
+    if (isInternational) {
+      maskedInput = new Maskito(input, maskitoInternationalOptions)
+    }
+    else {
+      maskedInput = new Maskito(input, maskitoNationalOptions)
+    }
+  }
+
+  beforeEach(() => {
+    input = document.createElement('input')
+    document.body.appendChild(input)
+  })
+
+  afterEach(() => {
+    maskedInput.destroy()
+    input.remove()
+  })
+
+  describe('mask behavior', () => {
+    describe('international mode', () => {
+      it('adds prefix when typing', async () => {
+        setup({ isInternational: true })
+        await user.type(input, '1')
+        expect(input.value).toBe('+1')
+      })
+    })
+
+    describe('national mode', () => {
+      it('does not add prefix when typing', async () => {
+        setup({ isInternational: false })
+        await user.type(input, '1')
+        expect(input.value).toBe('')
+      })
+
+      it('transitions to international mode when starting with +', async () => {
+        setup({ isInternational: false })
+        await user.type(input, '+1')
+        expect(input.value).toBe('+1')
+      })
+    })
+  })
+})
