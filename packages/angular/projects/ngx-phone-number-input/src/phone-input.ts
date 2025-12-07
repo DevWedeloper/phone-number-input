@@ -12,9 +12,17 @@ import { PhoneStateData } from './phone-state-data'
   standalone: true,
   host: {
     '(input)': 'onInput($event)',
+    '(blur)': 'onBlur()',
   },
   hostDirectives: [MaskitoDirective],
   providers: [
+    {
+      provide: PhoneStateData,
+      useFactory: () => {
+        const phoneStateData = inject(PhoneStateData, { optional: true, skipSelf: true })
+        return phoneStateData || new PhoneStateData()
+      },
+    },
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => PhoneInput),
@@ -62,7 +70,7 @@ export class PhoneInput implements ControlValueAccessor {
       )
     }
 
-    effect(() => this.maskito.options.set(this.mask()))
+    effect(() => this.maskito.options.set(this.mask()), { allowSignalWrites: true })
     effect(() => this.onChange(this.phoneStateData.phone()))
     effect(() => {
       const value = this.value()
@@ -92,9 +100,17 @@ export class PhoneInput implements ControlValueAccessor {
     this.onTouched = fn
   }
 
+  setDisabledState(isDisabled: boolean): void {
+    this.elementRef.nativeElement.disabled = isDisabled
+  }
+
   protected onInput(event: Event): void {
     const target = event.target as HTMLInputElement
     this.writeValue(target.value)
+  }
+
+  protected onBlur(): void {
+    this.onTouched()
   }
 
   private reset(): void {
