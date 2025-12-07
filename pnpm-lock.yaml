@@ -184,6 +184,15 @@ importers:
       '@phone-number-input/maskito':
         specifier: workspace:*
         version: link:../maskito
+      '@testing-library/angular':
+        specifier: ^17.4.0
+        version: 17.4.0(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(@angular/platform-browser@17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(@angular/router@17.3.12(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(@angular/platform-browser@17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(rxjs@7.8.2))(@testing-library/dom@10.4.1)
+      '@testing-library/dom':
+        specifier: ^10.4.1
+        version: 10.4.1
+      '@testing-library/jest-dom':
+        specifier: ^6.9.1
+        version: 6.9.1
       eslint:
         specifier: ^9.39.1
         version: 9.39.1(jiti@2.6.1)
@@ -2182,15 +2191,6 @@ packages:
       '@types/node':
         optional: true
 
-  '@inquirer/confirm@5.1.21':
-    resolution: {integrity: sha512-KR8edRkIsUayMXV+o3Gv+q4jlhENF9nMYUZs9PA2HzrXeHI8M5uDag70U7RJn9yyiMZSbtF5/UexBtAVtZGSbQ==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@types/node': '>=18'
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-
   '@inquirer/core@10.3.2':
     resolution: {integrity: sha512-43RTuEbfP8MbKzedNqBrlhhNKVwoK//vUFNW3Q3vZ88BLcrs4kYpGg+B2mm5p2K/HfygoCxuKwJJiv8PbGmE0A==}
     engines: {node: '>=18'}
@@ -3141,6 +3141,16 @@ packages:
 
   '@tailwindcss/postcss@4.1.17':
     resolution: {integrity: sha512-+nKl9N9mN5uJ+M7dBOOCzINw94MPstNR/GtIhz1fpZysxL/4a+No64jCBD6CPN+bIHWFx3KWuu8XJRrj/572Dw==}
+
+  '@testing-library/angular@17.4.0':
+    resolution: {integrity: sha512-xxh2tllgvpPD7lF8k2v7CGN4S5gj5zwaMA4kkM8lAZFbDj2vdW6zdVN0CxXZJy219JlztR+py2BM0KepuCKyLw==}
+    peerDependencies:
+      '@angular/animations': '>= 17.0.0'
+      '@angular/common': '>= 17.0.0'
+      '@angular/core': '>= 17.0.0'
+      '@angular/platform-browser': '>= 17.0.0'
+      '@angular/router': '>= 17.0.0'
+      '@testing-library/dom': ^10.0.0
 
   '@testing-library/dom@10.4.1':
     resolution: {integrity: sha512-o4PXJQidqJl82ckFaXUeoAW+XysPLauYI43Abki5hABd853iMhitooc6znOnczgbTYmEP6U6/y1ZyKAIsvMKGg==}
@@ -9551,13 +9561,6 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.19.25
 
-  '@inquirer/confirm@5.1.21(@types/node@20.19.25)':
-    dependencies:
-      '@inquirer/core': 10.3.2(@types/node@20.19.25)
-      '@inquirer/type': 3.0.10(@types/node@20.19.25)
-    optionalDependencies:
-      '@types/node': 20.19.25
-
   '@inquirer/core@10.3.2(@types/node@20.19.25)':
     dependencies:
       '@inquirer/ansi': 1.0.2
@@ -9621,7 +9624,7 @@ snapshots:
   '@inquirer/prompts@7.9.0(@types/node@20.19.25)':
     dependencies:
       '@inquirer/checkbox': 4.3.2(@types/node@20.19.25)
-      '@inquirer/confirm': 5.1.21(@types/node@20.19.25)
+      '@inquirer/confirm': 5.1.19(@types/node@20.19.25)
       '@inquirer/editor': 4.2.23(@types/node@20.19.25)
       '@inquirer/expand': 4.0.23(@types/node@20.19.25)
       '@inquirer/input': 4.3.1(@types/node@20.19.25)
@@ -9949,7 +9952,7 @@ snapshots:
       proc-log: 4.2.0
       promise-inflight: 1.0.1
       promise-retry: 2.0.1
-      semver: 7.6.0
+      semver: 7.7.3
       which: 4.0.0
     transitivePeerDependencies:
       - bluebird
@@ -9987,7 +9990,7 @@ snapshots:
       json-parse-even-better-errors: 3.0.2
       normalize-package-data: 6.0.2
       proc-log: 4.2.0
-      semver: 7.6.0
+      semver: 7.7.3
     transitivePeerDependencies:
       - bluebird
 
@@ -10411,6 +10414,16 @@ snapshots:
       '@tailwindcss/oxide': 4.1.17
       postcss: 8.5.6
       tailwindcss: 4.1.17
+
+  '@testing-library/angular@17.4.0(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(@angular/platform-browser@17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(@angular/router@17.3.12(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(@angular/platform-browser@17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(rxjs@7.8.2))(@testing-library/dom@10.4.1)':
+    dependencies:
+      '@angular/animations': 17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))
+      '@angular/common': 17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2)
+      '@angular/core': 17.3.12(rxjs@7.8.2)(zone.js@0.14.10)
+      '@angular/platform-browser': 17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))
+      '@angular/router': 17.3.12(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(@angular/platform-browser@17.3.12(@angular/animations@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(@angular/common@17.3.12(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10))(rxjs@7.8.2))(@angular/core@17.3.12(rxjs@7.8.2)(zone.js@0.14.10)))(rxjs@7.8.2)
+      '@testing-library/dom': 10.4.1
+      tslib: 2.8.1
 
   '@testing-library/dom@10.4.1':
     dependencies:
@@ -11525,7 +11538,7 @@ snapshots:
       postcss-modules-scope: 3.2.1(postcss@8.5.6)
       postcss-modules-values: 4.0.0(postcss@8.5.6)
       postcss-value-parser: 4.2.0
-      semver: 7.6.0
+      semver: 7.7.3
     optionalDependencies:
       webpack: 5.94.0(esbuild@0.20.1)
 
@@ -13832,7 +13845,7 @@ snapshots:
       make-fetch-happen: 13.0.1
       nopt: 7.2.1
       proc-log: 4.2.0
-      semver: 7.6.0
+      semver: 7.7.3
       tar: 6.2.1
       which: 4.0.0
     transitivePeerDependencies:
@@ -13866,7 +13879,7 @@ snapshots:
   normalize-package-data@6.0.2:
     dependencies:
       hosted-git-info: 7.0.2
-      semver: 7.6.0
+      semver: 7.7.3
       validate-npm-package-license: 3.0.4
 
   normalize-path@3.0.0: {}
@@ -13883,7 +13896,7 @@ snapshots:
 
   npm-install-checks@6.3.0:
     dependencies:
-      semver: 7.6.0
+      semver: 7.7.3
 
   npm-install-checks@8.0.0:
     dependencies:
@@ -14262,7 +14275,7 @@ snapshots:
       cosmiconfig: 9.0.0(typescript@5.4.5)
       jiti: 1.21.7
       postcss: 8.4.35
-      semver: 7.6.0
+      semver: 7.7.3
     optionalDependencies:
       webpack: 5.94.0(esbuild@0.20.1)
     transitivePeerDependencies:
