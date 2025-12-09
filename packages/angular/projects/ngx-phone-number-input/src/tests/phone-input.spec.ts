@@ -87,4 +87,39 @@ describe('phone-input', () => {
       expect(internationalSpy).toHaveBeenCalled()
     })
   })
+
+  describe('basic typing', () => {
+    it('auto mode: basic typing works', async () => {
+      const { fixture, input } = await setup()
+      const component = fixture.componentInstance
+
+      await userEvent.type(input, '12345')
+
+      expect(component.value()).toBe('+12345')
+    })
+
+    it('international mode: basic typing works', async () => {
+      const { fixture, input } = await setup()
+      const component = fixture.componentInstance
+
+      component.config = { mode: 'international', countryCode: 'US' }
+      fixture.detectChanges()
+
+      await userEvent.type(input, '2345')
+
+      expect(component.value()).toBe('+12345')
+    })
+
+    it('national mode: basic typing works', async () => {
+      const { fixture, input } = await setup()
+      const component = fixture.componentInstance
+
+      component.config = { mode: 'national', countryCode: 'US' }
+      fixture.detectChanges()
+
+      await userEvent.type(input, '2345')
+
+      expect(component.value()).toBe('+12345')
+    })
+  })
 })

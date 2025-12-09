@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core'
+import { Component, inject, signal } from '@angular/core'
+import { FormsModule } from '@angular/forms'
 import * as maskito from '@phone-number-input/maskito'
 import { render, screen } from '@testing-library/angular'
 import userEvent from '@testing-library/user-event'
@@ -23,21 +24,25 @@ describe('phone-input-with-country-select', () => {
 
   @Component({
     standalone: true,
-    imports: [PhoneInput, PhoneField, CountrySelectorTestComponent],
+    imports: [PhoneInput, PhoneField, CountrySelectorTestComponent, FormsModule],
     template: `
       <phone-field>
         <country-selector-test />
-        <input type="tel" placeholder="Input" phoneInput />
+        <input type="tel" placeholder="Input" phoneInput [(ngModel)]="value" />
       </phone-field>
     `,
   })
-  class TestComponent {}
+  class TestComponent {
+    value = signal('')
+  }
 
   const setup = async () => {
-    await render(TestComponent)
+    const { fixture } = await render(TestComponent)
 
     return {
       user: userEvent.setup(),
+      fixture,
+      input: screen.getByPlaceholderText('Input') as HTMLInputElement,
       countryCodeTrigger: screen.getByText('US') as HTMLButtonElement,
       selectedCountry: screen.getByText(/Selected country:/) as HTMLSpanElement,
     }
@@ -65,5 +70,22 @@ describe('phone-input-with-country-select', () => {
 
     lastCall = autoSpy.mock.lastCall![0]
     expect(lastCall.isInitialModeInternational).toBe(false)
+  })
+
+  it('auto mode: type → switch country → type', async () => {
+    const { user, fixture, input, countryCodeTrigger } = await setup()
+    const component = fixture.componentInstance
+
+    await user.type(input, '1212555')
+
+    expect(component.value()).toBe('+1212555')
+
+    await user.click(countryCodeTrigger)
+
+    expect(component.value()).toBe('')
+
+    await user.type(input, '212555')
+
+    expect(component.value()).toBe('+1212555')
   })
 })
