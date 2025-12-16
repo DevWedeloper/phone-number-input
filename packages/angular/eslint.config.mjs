@@ -49,6 +49,6 @@ export default combine(
     },
   },
   {
-    ignores: ['.angular/**'],
+    ignores: ['.angular/**', 'docs/**'],
   },
 )

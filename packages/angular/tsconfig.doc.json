@@ -1,0 +1,4 @@
+{
+  "include": ["projects/ngx-phone-number-input/src/**/*.ts"],
+  "exclude": ["projects/ngx-phone-number-input/src/test-setup.ts", "projects/ngx-phone-number-input/src/**/*.spec.ts"]
+}

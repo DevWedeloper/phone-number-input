@@ -2,12 +2,16 @@
   "name": "@phone-number-input/angular",
   "version": "0.0.0",
   "private": true,
+  "exports": {
+    "./docs": "./docs/json/documentation.json"
+  },
   "main": "./dist/ngx-phone-number-input/fesm2022/ngx-phone-number-input.mjs",
   "types": "./dist/ngx-phone-number-input/index.d.ts",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "pnpm run build:docs && ng build",
+    "build:docs": "pnpm compodoc -p tsconfig.doc.json -e json -d ./docs/json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "eslint . --max-warnings 0"
@@ -35,6 +39,7 @@
     "@angular/cli": "^17.3.17",
     "@angular/compiler-cli": "^17.3.0",
     "@antfu/eslint-config": "^6.4.2",
+    "@compodoc/compodoc": "^1.1.32",
     "@maskito/angular": "^4.0.1",
     "@phone-number-input/core": "workspace:*",
     "@phone-number-input/maskito": "workspace:*",
