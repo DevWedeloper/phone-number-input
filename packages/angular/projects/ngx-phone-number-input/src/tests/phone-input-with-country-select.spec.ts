@@ -4,9 +4,9 @@ import * as maskito from '@phone-number-input/maskito'
 import { render, screen } from '@testing-library/angular'
 import userEvent from '@testing-library/user-event'
 import { CountryCodeTrigger } from '../country-code-trigger'
+import { PhoneCountry } from '../phone-country'
 import { PhoneField } from '../phone-field'
 import { PhoneInput } from '../phone-input'
-import { PhoneStateData } from '../phone-state-data'
 
 describe('phone-input-with-country-select', () => {
   @Component({
@@ -19,7 +19,7 @@ describe('phone-input-with-country-select', () => {
     `,
   })
   class CountrySelectorTestComponent {
-    selectedCountry = inject(PhoneStateData).selectedCountry
+    selectedCountry = inject(PhoneCountry).selectedCountry
   }
 
   @Component({
