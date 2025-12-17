@@ -1,5 +1,5 @@
 import type { MaskitoPreprocessor } from '@maskito/core'
-import type { MetadataJson } from 'libphonenumber-js/core'
+import type { CountryCode, MetadataJson } from 'libphonenumber-js/core'
 import {
   AsYouType,
   parsePhoneNumber,
@@ -8,9 +8,11 @@ import {
 
 export function validateInternationalPhonePreprocessorGenerator({
   prefix,
+  countryIsoCode,
   metadata,
 }: {
   prefix: string
+  countryIsoCode?: CountryCode
   metadata: MetadataJson
 }): MaskitoPreprocessor {
   return ({ elementState, data }) => {
@@ -21,7 +23,7 @@ export function validateInternationalPhonePreprocessorGenerator({
 
     // handling autocomplete
     if (value && !value.startsWith(cleanCode) && !data) {
-      const formatter = new AsYouType({ defaultCountry: undefined }, metadata)
+      const formatter = new AsYouType({ defaultCountry: countryIsoCode }, metadata)
 
       formatter.input(value)
       const numberValue = formatter.getNumberValue() ?? ''
@@ -34,12 +36,15 @@ export function validateInternationalPhonePreprocessorGenerator({
     try {
       const validationError = validatePhoneNumberLength(
         data,
+        { defaultCountry: countryIsoCode },
         metadata,
       )
 
       if (!validationError || validationError === 'TOO_SHORT') {
         // handle paste-event with different code, for example for 8 / +7
-        const phone = parsePhoneNumber(data, metadata)
+        const phone = countryIsoCode
+          ? parsePhoneNumber(data, countryIsoCode, metadata)
+          : parsePhoneNumber(data, metadata)
 
         const { nationalNumber, countryCallingCode } = phone
 

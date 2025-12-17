@@ -48,7 +48,7 @@ export function updatePhoneState(
     }
 
     if (next.derivedMode === 'international') {
-      const formatter = new AsYouType({ defaultCountry: undefined }, metadata)
+      const formatter = new AsYouType({ defaultCountry: config.countryCode }, metadata)
       formatter.input(next.input)
 
       next = {

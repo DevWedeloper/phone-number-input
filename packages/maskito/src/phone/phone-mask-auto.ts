@@ -8,13 +8,13 @@ import { generatePhoneMask, getInternationalPhoneTemplate, getNationalPhoneTempl
 type PhoneAutoGeneratorOptions
   = | {
     isInitialModeInternational: true
-    countryIsoCode?: undefined // cannot provide country code in international mode
+    countryIsoCode?: CountryCode
     metadata: MetadataJson
     separator?: string
   }
   | {
     isInitialModeInternational: false
-    countryIsoCode: CountryCode // must provide country code in local mode
+    countryIsoCode: CountryCode
     metadata: MetadataJson
     separator?: string
   }
@@ -59,7 +59,7 @@ export function phoneAutoGenerator(options: PhoneAutoGeneratorOptions): Required
         const value = data.elementState.value || data.data
 
         if (isInitialModeInternational || shouldUseInternational(isInitialModeInternational, value)) {
-          return validateInternationalPhonePreprocessorGenerator({ prefix: '+', metadata })(data, actionType)
+          return validateInternationalPhonePreprocessorGenerator({ prefix: '+', countryIsoCode, metadata })(data, actionType)
         }
         else {
           return validateNationalPhonePreprocessorGenerator({ prefix: `+${getCountryCallingCode(countryIsoCode, metadata)}`, countryIsoCode, metadata })(data, actionType)
