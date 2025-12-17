@@ -9,7 +9,7 @@ describe('phone-mask-auto', () => {
   const user = userEvent.setup()
 
   const setup = ({ isInternational}: { isInternational: boolean }) => {
-    const maskitoInternationalOptions = phoneAutoGenerator({ isInitialModeInternational: true, metadata })
+    const maskitoInternationalOptions = phoneAutoGenerator({ isInitialModeInternational: true, countryIsoCode: 'US', metadata })
     const maskitoNationalOptions = phoneAutoGenerator({ isInitialModeInternational: false, countryIsoCode: 'US', metadata })
 
     if (isInternational) {
@@ -36,6 +36,14 @@ describe('phone-mask-auto', () => {
         setup({ isInternational: true })
         await user.type(input, '1')
         expect(input.value).toBe('+1')
+      })
+
+      it('formats pasted national number when default country is provided', async () => {
+        setup({ isInternational: true })
+        await user.click(input)
+        await userEvent.paste('2125551234')
+
+        expect(input.value).toBe('+1 212 555-1234')
       })
     })
 
