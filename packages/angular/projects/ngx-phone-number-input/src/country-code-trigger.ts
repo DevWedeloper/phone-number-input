@@ -23,6 +23,11 @@ import { PhoneStateData } from './phone-state-data'
 export class CountryCodeTrigger {
   private phoneStateData = inject(PhoneStateData)
 
+  /**
+   * The country code that will be set when the host element is clicked.
+   *
+   * This input is required and should be a valid ISO country code.
+   */
   countryCode = input.required<CountryCode | null>()
 
   protected onClick(): void {

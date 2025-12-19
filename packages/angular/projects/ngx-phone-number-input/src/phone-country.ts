@@ -13,8 +13,19 @@ import { PhoneStateData } from './phone-state-data'
 export class PhoneCountry {
   private phoneState = inject(PhoneStateData)
 
+  /**
+   * The currently selected country.
+   *
+   * This reflects the state in {@link PhoneStateData} and can be
+   * used to read the currently active country code.
+   */
   selectedCountry = this.phoneState.selectedCountry
 
+  /**
+   * Sets the selected country.
+   *
+   * @param country - The new country code to set, or `null` to clear it.
+   */
   setCountry(country: CountryCode | null) {
     this.phoneState.setCountry(country)
   }

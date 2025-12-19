@@ -79,6 +79,7 @@ export class PhoneInput implements ControlValueAccessor {
   private onChange: (value: string) => void = () => {}
   private onTouched: () => void = () => {}
 
+  /** @internal */
   constructor() {
     const element = this.elementRef.nativeElement as HTMLInputElement
 
@@ -106,6 +107,7 @@ export class PhoneInput implements ControlValueAccessor {
     })
   }
 
+  /** @internal */
   writeValue(value: string | null): void {
     const v = value ?? ''
     const sanitized = maskitoTransform(v, this.mask())
@@ -113,14 +115,17 @@ export class PhoneInput implements ControlValueAccessor {
     this.elementRef.nativeElement.value = sanitized
   }
 
+  /** @internal */
   registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn
   }
 
+  /** @internal */
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn
   }
 
+  /** @internal */
   setDisabledState(isDisabled: boolean): void {
     this.elementRef.nativeElement.disabled = isDisabled
   }
