@@ -2,6 +2,21 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { PhoneCountry } from './phone-country'
 import { PhoneStateData } from './phone-state-data'
 
+/**
+ * Component representing a phone input field container.
+ *
+ * This component provides phone input state management via
+ * {@link PhoneStateData} and {@link PhoneCountry} services.
+ * It uses content projection (`<ng-content />`) for rendering
+ * the actual input element, allowing flexible UI composition.
+ *
+ * ### Usage
+ * ```html
+ * <phone-field>
+ *   <input type="tel" />
+ * </phone-field>
+ * ```
+ */
 @Component({
   selector: 'phone-field,[phoneField]',
   standalone: true,

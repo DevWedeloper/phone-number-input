@@ -8,6 +8,20 @@ import { phoneAutoGenerator, phoneInternationalGenerator, phoneNationalGenerator
 import metadata from 'libphonenumber-js/min/metadata'
 import { PhoneStateData } from './phone-state-data'
 
+/**
+ * Directive that transforms a standard `<input>` into a reactive phone input.
+ *
+ * This directive:
+ * - Integrates with `PhoneStateData` to track the current phone value and selected country.
+ * - Supports automatic, international, and national formatting modes via `config`.
+ * - Works as a `ControlValueAccessor` for use with Angular forms.
+ * - Applies input masking using `MaskitoDirective` and phone number generators.
+ *
+ * ### Usage
+ * ```html
+ * <input type="tel" phoneInput />
+ * ```
+ */
 @Directive({
   selector: 'input[phoneInput]',
   standalone: true,
@@ -36,6 +50,9 @@ export class PhoneInput implements ControlValueAccessor {
   private elementRef = inject(ElementRef) as ElementRef<HTMLInputElement>
   private phoneStateData = inject(PhoneStateData)
 
+  /**
+   * Configuration input for the phone input.
+   */
   config = input<PhoneInputConfig>({ mode: 'auto' })
 
   private mask = computed(() => {

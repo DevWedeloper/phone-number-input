@@ -5,6 +5,16 @@ import { toSignal } from '@angular/core/rxjs-interop'
 import { updatePhoneState } from '@phone-number-input/core'
 import { combineLatest, distinctUntilChanged, map, merge, scan, shareReplay, Subject } from 'rxjs'
 
+/**
+ * @internal
+ *
+ * Internal service managing the phone input state.
+ *
+ * This class is responsible for handling the phone input value,
+ * selected country, configuration, and derived state like
+ * `derivedMode` and `resetInput`. It is intended for internal
+ * use only and should not be used directly outside the library.
+ */
 @Injectable()
 export class PhoneStateData {
   private input$ = new Subject<string>()
