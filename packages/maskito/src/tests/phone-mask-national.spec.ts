@@ -29,21 +29,21 @@ describe('phone-mask-national', () => {
 
     it('handles pasting international format', async () => {
       await user.click(input)
-      await userEvent.paste('+12125551234')
+      await user.paste('+12125551234')
 
       expect(input.value).toBe('212 555-1234')
     })
 
     it('handles pasting national format', async () => {
       await user.click(input)
-      await userEvent.paste('2125551234')
+      await user.paste('2125551234')
 
       expect(input.value).toBe('212 555-1234')
     })
 
     it('trims extra digits when pasting too-long number', async () => {
       await user.click(input)
-      await userEvent.paste('212555123400000')
+      await user.paste('212555123400000')
       expect(input.value).toBe('212 555-1234')
     })
 

@@ -42,7 +42,16 @@ export class PhoneStateData {
 
   private countryAndDerivedMode$ = this.state$.pipe(
     map(state => ({ country: state.country, derivedMode: state.derivedMode })),
-    distinctUntilChanged((prev, curr) => prev.country === curr.country && prev.derivedMode === curr.derivedMode),
+    distinctUntilChanged((prev, curr) => {
+      // If derivedMode is international, ignore country changes
+      if (prev.derivedMode === 'international' && curr.derivedMode === 'international') {
+        return true
+      }
+
+      return (
+        prev.country === curr.country && prev.derivedMode === curr.derivedMode
+      )
+    }),
   )
 
   private inputReset$ = this.state$.pipe(
