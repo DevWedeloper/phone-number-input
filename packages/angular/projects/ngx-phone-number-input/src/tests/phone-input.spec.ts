@@ -36,7 +36,7 @@ describe('phone-input', () => {
       directive.writeValue('12345')
       fixture.detectChanges()
 
-      expect(component.value()).toBe('12345')
+      expect(component.value()).toBe('+12345')
     })
 
     it('should update ngModel when typing in input', async () => {
