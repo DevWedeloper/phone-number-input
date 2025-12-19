@@ -17,8 +17,6 @@ export function validateInternationalPhonePreprocessorGenerator({
 }): MaskitoPreprocessor {
   return ({ elementState, data }) => {
     const { selection, value } = elementState
-    const [from] = selection
-    const selectionIncludesPrefix = from < prefix.length
     const cleanCode = prefix.trim()
 
     // handling autocomplete
@@ -53,11 +51,9 @@ export function validateInternationalPhonePreprocessorGenerator({
         return {
           elementState: {
             selection,
-            value: selectionIncludesPrefix ? '' : prefix,
+            value: '',
           },
-          data: selectionIncludesPrefix
-            ? `+${countryCallingCode} ${nationalNumber}`
-            : nationalNumber,
+          data: `+${countryCallingCode} ${nationalNumber}`,
         }
       }
     }

@@ -45,6 +45,14 @@ describe('phone-mask-auto', () => {
 
         expect(input.value).toBe('+1 212 555-1234')
       })
+
+      it('pastes complete number', async () => {
+        setup({ isInternational: true })
+
+        await user.click(input)
+        await userEvent.paste('648885554567')
+        expect(input.value).toBe('+64 888 555-4567')
+      })
     })
 
     describe('national mode', () => {
