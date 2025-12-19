@@ -11,7 +11,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "pnpm run build:docs && ng build ngx-phone-number-input",
-    "build:docs": "pnpm compodoc -p tsconfig.doc.json -e json -d ./docs/json --disableSourceCode  --disablePrivate --disableProtected --disableInternal",
+    "build:docs": "pnpm compodoc -p tsconfig.doc.json -e json -d ./docs/json --disableSourceCode  --disablePrivate --disableProtected --disableInternal --disableRoutesGraph",
     "watch": "ng build ngx-phone-number-input --watch --configuration development",
     "test": "ng test ngx-phone-number-input",
     "lint": "eslint . --max-warnings 0",
