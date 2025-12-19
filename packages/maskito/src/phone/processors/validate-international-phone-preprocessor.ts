@@ -30,7 +30,9 @@ export function validateInternationalPhonePreprocessorGenerator({
 
       formatter.reset()
 
-      return { elementState: { value: formatter.input(numberValue), selection } }
+      const newVal = formatter.input(numberValue) || `+${value}`
+
+      return { elementState: { value: newVal, selection } }
     }
 
     try {
