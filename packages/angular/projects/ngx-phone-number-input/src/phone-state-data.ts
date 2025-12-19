@@ -3,7 +3,7 @@ import type { CountryCode } from 'libphonenumber-js/core'
 import { Injectable } from '@angular/core'
 import { toSignal } from '@angular/core/rxjs-interop'
 import { updatePhoneState } from '@phone-number-input/core'
-import { combineLatest, map, merge, scan, shareReplay, Subject } from 'rxjs'
+import { combineLatest, distinctUntilChanged, map, merge, scan, shareReplay, Subject } from 'rxjs'
 
 @Injectable()
 export class PhoneStateData {
@@ -42,6 +42,7 @@ export class PhoneStateData {
 
   private countryAndDerivedMode$ = this.state$.pipe(
     map(state => ({ country: state.country, derivedMode: state.derivedMode })),
+    distinctUntilChanged((prev, curr) => prev.country === curr.country && prev.derivedMode === curr.derivedMode),
   )
 
   private inputReset$ = this.state$.pipe(

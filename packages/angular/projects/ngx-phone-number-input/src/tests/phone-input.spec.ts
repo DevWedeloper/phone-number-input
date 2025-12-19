@@ -29,6 +29,18 @@ describe('phone-input', () => {
   }
 
   describe('CVA', () => {
+    it('should render initial value into the input', async () => {
+      const { fixture, input } = await setup()
+      const component = fixture.componentInstance
+
+      component.value.set('2125554567')
+      fixture.detectChanges()
+
+      await fixture.whenStable()
+
+      expect(input.value).toBe('+212 555 45-67')
+    })
+
     it('should update input value when writeValue is called', async () => {
       const { fixture, directive } = await setup()
       const component = fixture.componentInstance

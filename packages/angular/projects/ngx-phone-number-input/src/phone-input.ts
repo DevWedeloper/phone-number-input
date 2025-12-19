@@ -3,6 +3,7 @@ import type { PhoneInputConfig } from '@phone-number-input/core'
 import { computed, Directive, effect, ElementRef, forwardRef, inject, input, isDevMode, signal, untracked } from '@angular/core'
 import { NG_VALUE_ACCESSOR } from '@angular/forms'
 import { MaskitoDirective } from '@maskito/angular'
+import { maskitoTransform } from '@maskito/core'
 import { phoneAutoGenerator, phoneInternationalGenerator, phoneNationalGenerator } from '@phone-number-input/maskito'
 import metadata from 'libphonenumber-js/min/metadata'
 import { PhoneStateData } from './phone-state-data'
@@ -89,7 +90,10 @@ export class PhoneInput implements ControlValueAccessor {
   }
 
   writeValue(value: string | null): void {
-    this.value.set(value || '')
+    const v = value ?? ''
+    const sanitized = maskitoTransform(v, this.mask())
+    this.value.set(sanitized)
+    this.elementRef.nativeElement.value = sanitized
   }
 
   registerOnChange(fn: (value: string) => void): void {
@@ -106,7 +110,7 @@ export class PhoneInput implements ControlValueAccessor {
 
   protected onInput(event: Event): void {
     const target = event.target as HTMLInputElement
-    this.writeValue(target.value)
+    this.value.set(target.value)
   }
 
   protected onBlur(): void {
