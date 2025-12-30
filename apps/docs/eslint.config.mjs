@@ -1,9 +1,15 @@
 import antfu from '@antfu/eslint-config'
+import tsParser from '@typescript-eslint/parser'
 import eslintPluginBetterTailwindcss from 'eslint-plugin-better-tailwindcss'
 
 export default antfu({
   formatters: true,
   astro: true,
+}, {
+  files: ['**/*.ts', '**/*.tsx', '**/*.jsx'],
+  languageOptions: {
+    parser: tsParser,
+  },
 }, {
   plugins: {
     'better-tailwindcss': eslintPluginBetterTailwindcss,
