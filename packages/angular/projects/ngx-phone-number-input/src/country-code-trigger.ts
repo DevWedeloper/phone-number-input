@@ -10,7 +10,6 @@ import { PhoneStateData } from './phone-state-data'
  */
 @Directive({
   selector: '[countryCodeTrigger]',
-  standalone: true,
   host: {
     '(click)': 'onClick()',
   },

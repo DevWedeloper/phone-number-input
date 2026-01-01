@@ -19,7 +19,6 @@ import { PhoneStateData } from './phone-state-data'
  */
 @Directive({
   selector: 'input[phoneInput]',
-  standalone: true,
   host: {
     '(input)': 'onInput($event)',
     '(blur)': 'onBlur()',
@@ -84,7 +83,7 @@ export class PhoneInput implements ControlValueAccessor {
       )
     }
 
-    effect(() => this.maskito.options.set(this.mask()), { allowSignalWrites: true })
+    effect(() => this.maskito.options.set(this.mask()))
     effect(() => this.onChange(this.phoneStateData.phone()))
     effect(() => {
       const value = this.value()
