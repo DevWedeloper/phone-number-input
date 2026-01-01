@@ -1,0 +1,12 @@
+---
+import data from '@phone-number-input/angular/docs'
+import ApiDocs from '../../shared/docs/ApiDocs.astro'
+import AngularLayout from '../../layouts/AngularLayout.astro'
+import { RootSchema } from '../../shared/compodoc-zod'
+
+const parsedData = RootSchema.parse(data)
+---
+
+<AngularLayout>
+  <ApiDocs data={parsedData} />
+</AngularLayout>

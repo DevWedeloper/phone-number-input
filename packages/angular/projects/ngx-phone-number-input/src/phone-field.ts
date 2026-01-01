@@ -9,13 +9,6 @@ import { PhoneStateData } from './phone-state-data'
  * {@link PhoneStateData} and {@link PhoneCountry} services.
  * It uses content projection (`<ng-content />`) for rendering
  * the actual input element, allowing flexible UI composition.
- *
- * ### Usage
- * ```html
- * <phone-field>
- *   <input type="tel" />
- * </phone-field>
- * ```
  */
 @Component({
   selector: 'phone-field,[phoneField]',

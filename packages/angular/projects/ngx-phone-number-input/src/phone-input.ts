@@ -16,11 +16,6 @@ import { PhoneStateData } from './phone-state-data'
  * - Supports automatic, international, and national formatting modes via `config`.
  * - Works as a `ControlValueAccessor` for use with Angular forms.
  * - Applies input masking using `MaskitoDirective` and phone number generators.
- *
- * ### Usage
- * ```html
- * <input type="tel" phoneInput />
- * ```
  */
 @Directive({
   selector: 'input[phoneInput]',

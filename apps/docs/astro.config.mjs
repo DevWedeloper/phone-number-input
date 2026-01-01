@@ -1,4 +1,6 @@
+import angular from '@analogjs/astro-angular'
 import tailwindcss from '@tailwindcss/vite'
+
 // @ts-check
 import { defineConfig } from 'astro/config'
 
@@ -6,5 +8,15 @@ import { defineConfig } from 'astro/config'
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
+    ssr: {
+      noExternal: ['@maskito/angular'],
+    },
   },
+  integrations: [angular({
+    vite: {
+      transformFilter: (_code, id) => {
+        return id.includes('src/components/angular')
+      },
+    },
+  })],
 })

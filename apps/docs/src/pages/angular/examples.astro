@@ -1,0 +1,10 @@
+---
+import { HelloComponent } from '../../components/angular/hello'
+import { TestComponent } from '../../components/angular/test'
+import AngularLayout from '../../layouts/AngularLayout.astro'
+---
+
+<AngularLayout>
+  <HelloComponent client:load />
+  <TestComponent client:load />
+</AngularLayout>

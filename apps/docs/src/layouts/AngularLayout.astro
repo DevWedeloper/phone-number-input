@@ -1,0 +1,17 @@
+---
+import BaseLayout from './BaseLayout.astro'
+
+interface Props {
+  title?: string
+}
+
+const { title = 'Phone Number Input | Angular' } = Astro.props
+---
+
+<BaseLayout title={title}>
+  <div class="w-full flex justify-center">
+    <div class="max-w-200">
+      <slot />
+    </div>
+  </div>
+</BaseLayout>

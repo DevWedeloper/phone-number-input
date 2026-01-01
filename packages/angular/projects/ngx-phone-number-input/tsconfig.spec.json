@@ -2,7 +2,6 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "es2022",
     "types": ["vitest/globals", "node"],
     "outDir": "../../out-tsc/spec"
   },
@@ -10,8 +9,5 @@
   "include": [
     "**/*.spec.ts",
     "**/*.d.ts"
-  ],
-  "angularCompilerOptions": {
-    "enableIvy": true
-  }
+  ]
 }

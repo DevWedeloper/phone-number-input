@@ -3,13 +3,13 @@
   "version": "0.0.1",
   "sideEffects": false,
   "peerDependencies": {
-    "@angular/common": ">=^17.3.0",
-    "@angular/core": ">=^17.3.0",
-    "@maskito/angular": "^4.0.1",
-    "@maskito/core": "^4.0.1",
-    "@maskito/kit": "^4.0.1",
-    "@maskito/phone": "^4.0.1",
-    "libphonenumber-js": "^1.12.29"
+    "@angular/common": ">=19.2.17",
+    "@angular/core": ">=19.2.17",
+    "@maskito/angular": ">=4.0.0",
+    "@maskito/core": ">=4.0.0",
+    "@maskito/kit": ">=4.0.0",
+    "@maskito/phone": ">=4.0.0",
+    "libphonenumber-js": ">=1.0.0"
   },
   "dependencies": {
     "@phone-number-input/core": "workspace:*",

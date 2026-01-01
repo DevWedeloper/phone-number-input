@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+    ".": {
+      "types": "./dist/ngx-phone-number-input/index.d.ts",
+      "import": "./dist/ngx-phone-number-input/fesm2022/ngx-phone-number-input.mjs"
+    },
     "./docs": "./docs/json/documentation.json"
   },
   "main": "./dist/ngx-phone-number-input/fesm2022/ngx-phone-number-input.mjs",
@@ -14,23 +18,21 @@
     "build:docs": "pnpm compodoc -p tsconfig.doc.json -e json -d ./docs/json --disableSourceCode  --disablePrivate --disableProtected --disableInternal --disableRoutesGraph",
     "watch": "ng build ngx-phone-number-input --watch --configuration development",
     "test": "ng test ngx-phone-number-input",
-    "lint": "eslint . --max-warnings 0",
-    "serve:ssr:my-app": "node dist/my-app/server/server.mjs"
+    "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
     "@angular-eslint/eslint-plugin": "^21.0.1",
     "@angular-eslint/eslint-plugin-template": "^21.0.1",
     "@angular-eslint/template-parser": "^21.0.1",
-    "@angular/animations": "^17.3.0",
-    "@angular/common": "^17.3.0",
-    "@angular/compiler": "^17.3.0",
-    "@angular/core": "^17.3.0",
-    "@angular/forms": "^17.3.0",
-    "@angular/platform-browser": "^17.3.0",
-    "@angular/platform-browser-dynamic": "^17.3.0",
-    "@angular/platform-server": "^17.3.0",
-    "@angular/router": "^17.3.0",
-    "@angular/ssr": "^17.3.17",
+    "@angular/build": "^19.2.19",
+    "@angular/common": "^19.2.17",
+    "@angular/compiler": "^19.2.17",
+    "@angular/core": "^19.2.17",
+    "@angular/forms": "^19.2.17",
+    "@angular/platform-browser": "^19.2.17",
+    "@angular/platform-browser-dynamic": "^19.2.17",
+    "@angular/platform-server": "^19.2.17",
+    "@angular/router": "^19.2.17",
     "@typescript-eslint/parser": "^8.48.1",
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
@@ -39,9 +41,9 @@
   "devDependencies": {
     "@analogjs/vite-plugin-angular": "^2.1.2",
     "@analogjs/vitest-angular": "^2.1.2",
-    "@angular-devkit/build-angular": "^17.3.17",
-    "@angular/cli": "^17.3.17",
-    "@angular/compiler-cli": "^17.3.0",
+    "@angular-devkit/build-angular": "^19.2.19",
+    "@angular/cli": "^19.2.19",
+    "@angular/compiler-cli": "^19.2.17",
     "@antfu/eslint-config": "^6.4.2",
     "@compodoc/compodoc": "^1.1.32",
     "@maskito/angular": "^4.0.1",
@@ -56,9 +58,9 @@
     "eslint-plugin-format": "^1.0.2",
     "jsdom": "^27.2.0",
     "libphonenumber-js": "^1.12.31",
-    "ng-packagr": "^17.3.0",
+    "ng-packagr": "^19.2.2",
     "tslib": "^2.8.1",
-    "typescript": "~5.4.2",
+    "typescript": "~5.8.3",
     "vite": "^7.2.6",
     "vitest": "^4.0.15"
   }

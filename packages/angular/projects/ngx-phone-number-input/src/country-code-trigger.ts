@@ -7,11 +7,6 @@ import { PhoneStateData } from './phone-state-data'
  *
  * Use this directive on a clickable element (e.g., button or list item)
  * to update the selected country in the phone input state.
- *
- * ### Usage
- * ```html
- * <button [countryCodeTrigger]="countryCode">Select Country</button>
- * ```
  */
 @Directive({
   selector: '[countryCodeTrigger]',
