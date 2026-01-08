@@ -15,7 +15,7 @@ const CodeTabs: FC<CodeTabsProps> = ({ example, code, defaultTab = 'example' }) 
         <TabsTrigger value="code">Code</TabsTrigger>
       </TabsList>
 
-      <TabsContent value="example" className="border-border flex min-h-[350px] items-center justify-center rounded-md border">{example}</TabsContent>
+      <TabsContent value="example" className="border-border flex min-h-87.5 items-center justify-center rounded-md border">{example}</TabsContent>
       <TabsContent value="code" className="border-border flex items-center justify-center rounded-md border">{code}</TabsContent>
     </Tabs>
   )
