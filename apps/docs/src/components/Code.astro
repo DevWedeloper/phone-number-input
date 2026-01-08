@@ -1,0 +1,10 @@
+---
+import Prism from 'prismjs'
+import CodeClient from './Code.tsx'
+
+const { code, language = 'typescript' } = Astro.props
+
+const highlightedCode = Prism.highlight(code.trim(), Prism.languages[language], language)
+---
+
+<CodeClient client:load code={code} language={language} highlightedCode={highlightedCode} />

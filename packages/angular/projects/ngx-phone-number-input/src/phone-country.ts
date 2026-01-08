@@ -1,3 +1,4 @@
+import type { Signal } from '@angular/core'
 import type { CountryCode } from 'libphonenumber-js/core'
 import { inject, Injectable } from '@angular/core'
 import { PhoneStateData } from './phone-state-data'
@@ -19,7 +20,7 @@ export class PhoneCountry {
    * This reflects the state in {@link PhoneStateData} and can be
    * used to read the currently active country code.
    */
-  selectedCountry = this.phoneState.selectedCountry
+  selectedCountry: Signal<CountryCode | null> = this.phoneState.selectedCountry
 
   /**
    * Sets the selected country.
