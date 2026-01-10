@@ -17,7 +17,7 @@ export default function Code({ code, highlightedCode, language = 'typescript' }:
   }
 
   return (
-    <div className="group bg-muted relative max-h-162.5 w-full overflow-auto p-4">
+    <div className="group bg-muted relative max-h-162.5 w-full max-w-screen overflow-auto p-4">
       <button
         className="absolute top-2 right-2 rounded px-2 py-1 text-sm opacity-0 transition group-hover:opacity-100"
         onClick={copyToClipboard}
