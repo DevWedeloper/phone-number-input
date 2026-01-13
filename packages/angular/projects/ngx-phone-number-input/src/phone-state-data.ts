@@ -7,13 +7,7 @@ import { combineLatest, distinctUntilChanged, map, merge, scan, shareReplay, Sub
 
 /**
  * @internal
- *
- * Internal service managing the phone input state.
- *
- * This class is responsible for handling the phone input value,
- * selected country, configuration, and derived state like
- * `derivedMode` and `resetInput`. It is intended for internal
- * use only and should not be used directly outside the library.
+ * Manages phone input state, including value, selected country, config, and derived state.
  */
 @Injectable()
 export class PhoneStateData {

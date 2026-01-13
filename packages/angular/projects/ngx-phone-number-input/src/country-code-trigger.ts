@@ -3,10 +3,8 @@ import { Directive, inject, input } from '@angular/core'
 import { PhoneStateData } from './phone-state-data'
 
 /**
- * Directive that sets the phone country code when the host element is clicked.
- *
- * Use this directive on a clickable element (e.g., button or list item)
- * to update the selected country in the phone input state.
+ * Sets the phone country code when the host element is clicked.
+ * Use on clickable elements to update the phone input's selected country.
  */
 @Directive({
   selector: '[countryCodeTrigger]',
@@ -18,9 +16,7 @@ export class CountryCodeTrigger {
   private phoneStateData = inject(PhoneStateData)
 
   /**
-   * The country code that will be set when the host element is clicked.
-   *
-   * This input is required and should be a valid ISO country code.
+   * Required ISO country code to set when the host element is clicked.
    */
   countryCode = input.required<CountryCode | null>()
 

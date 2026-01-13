@@ -9,13 +9,8 @@ import metadata from 'libphonenumber-js/min/metadata'
 import { PhoneStateData } from './phone-state-data'
 
 /**
- * Directive that transforms a standard `<input>` into a reactive phone input.
- *
- * This directive:
- * - Integrates with `PhoneStateData` to track the current phone value and selected country.
- * - Supports automatic, international, and national formatting modes via `config`.
- * - Works as a `ControlValueAccessor` for use with Angular forms.
- * - Applies input masking using `MaskitoDirective` and phone number generators.
+ * Transforms a standard `<input>` into a reactive phone input.
+ * Tracks phone state, supports multiple formats, works with Angular forms, and applies input masking.
  */
 @Directive({
   selector: 'input[phoneInput]',
