@@ -1,0 +1,32 @@
+---
+interface Link {
+  label: string
+  href: string
+}
+
+const { links } = Astro.props as { links: Link[] }
+const { pathname } = Astro.url
+---
+
+<nav class="relative flex gap-1 border-b border-border mb-6">
+  {
+    links.map((link) => {
+      const isActive = pathname === link.href || pathname.endsWith(link.href)
+
+      return (
+        <a
+          href={link.href}
+          aria-current={isActive ? 'page' : undefined}
+          class:list={[
+            'px-3 py-2 text-sm font-medium transition-colors relative',
+            'text-muted-foreground hover:text-foreground',
+            'after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-red-500 after:scale-x-0 after:transition-transform after:origin-left',
+            isActive && 'text-foreground after:scale-x-100',
+          ]}
+        >
+          {link.label}
+        </a>
+      )
+    })
+  }
+</nav>

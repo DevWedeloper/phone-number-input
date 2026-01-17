@@ -4,7 +4,7 @@ import type {
   TemplateRef,
 } from '@angular/core'
 import type { CountryCode } from 'libphonenumber-js/core'
-import { Overlay } from '@angular/cdk/overlay'
+import { Overlay, ScrollStrategyOptions } from '@angular/cdk/overlay'
 import { TemplatePortal } from '@angular/cdk/portal'
 import {
   ChangeDetectionStrategy,
@@ -23,7 +23,7 @@ import metadata from 'libphonenumber-js/min/metadata'
   selector: 'country-select',
   imports: [CountryCodeTrigger],
   host: {
-    class: 'inline-block relative w-10 border border-border rounded-sm',
+    class: 'inline-block relative w-10 border',
   },
   template: `
     <button
@@ -35,12 +35,12 @@ import metadata from 'libphonenumber-js/min/metadata'
       @if (selectedCountry()) {
         <span class="text-xl">{{ flag(selectedCountry()!) }}</span>
       } @else {
-        <span class="text-xl text-muted-foreground">n/a</span>
+        <span class="text-xl">n/a</span>
       }
     </button>
 
     <ng-template #dropdown>
-      <div class="flex flex-col bg-background border rounded-md">
+      <div class="flex flex-col border">
         <input
           #search
           type="text"
@@ -51,7 +51,7 @@ import metadata from 'libphonenumber-js/min/metadata'
 
         <div class="max-h-56 overflow-y-auto">
           <button
-            class="block px-3 py-2 text-left cursor-pointer"
+            class="block px-3 py-2 text-left cursor-pointer border-b w-full"
             countryCodeTrigger
             [countryCode]="null"
             (click)="select()"
@@ -61,7 +61,7 @@ import metadata from 'libphonenumber-js/min/metadata'
 
           @for (country of filteredCountries(); track country) {
             <button
-              class="block px-3 py-2 text-left cursor-pointer"
+              class="block px-3 py-2 text-left cursor-pointer border-b last:border-b-0 w-full"
               countryCodeTrigger
               [countryCode]="country"
               (click)="select()"
@@ -82,6 +82,7 @@ export class CountrySelect {
   private readonly overlay = inject(Overlay)
   private readonly viewContainerRef = inject(ViewContainerRef)
   private readonly phoneCountry = inject(PhoneCountry)
+  private readonly sso = inject(ScrollStrategyOptions)
 
   private readonly dropdownTemplate
     = viewChild.required<TemplateRef<unknown>>('dropdown')
@@ -130,6 +131,7 @@ export class CountrySelect {
       hasBackdrop: true,
       backdropClass: 'cdk-overlay-transparent-backdrop',
       positionStrategy,
+      scrollStrategy: this.sso.reposition(),
     })
 
     this.overlayRef.backdropClick().subscribe(() => this.close())

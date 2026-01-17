@@ -1,0 +1,22 @@
+---
+title: "Angular API"
+description: "Angular API description"
+---
+
+import data from '@phone-number-input/angular/docs'
+import ApiDocs from '@/components/docs/ApiDocs.astro'
+import { RootSchema } from '@/components/compodoc-zod'
+
+export const parsedData = RootSchema.parse(data)
+
+import RoutedTabs from '@/components/RoutedTabs.astro'
+
+<RoutedTabs
+  links={[
+    { label: 'Overview', href: '/angular/overview' },
+    { label: 'API', href: '/angular/api' },
+    { label: 'Examples', href: '/angular/examples' },
+  ]}
+/>
+
+<ApiDocs data={parsedData} />
