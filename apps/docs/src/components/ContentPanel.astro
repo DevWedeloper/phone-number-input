@@ -1,6 +1,20 @@
-<div class="content-panel">
-  <slot />
-</div>
+---
+import Default from '@astrojs/starlight/components/ContentPanel.astro'
+
+const isHomepage = Astro.locals.starlightRoute.id === ''
+---
+
+{
+  isHomepage ? (
+    <Default>
+      <slot />
+    </Default>
+  ) : (
+    <div class="content-panel">
+      <slot />
+    </div>
+  )
+}
 
 <style>
   @layer starlight.core {

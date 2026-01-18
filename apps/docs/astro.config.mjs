@@ -5,7 +5,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 // @ts-check
 import { defineConfig } from 'astro/config'
-import { ion } from 'starlight-ion-theme'
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,7 +16,7 @@ export default defineConfig({
   },
   integrations: [
     starlight({
-      title: 'My delightful docs site',
+      title: 'Phone Number Input',
       components: {
         Head: './src/components/Head.astro',
         ContentPanel: './src/components/ContentPanel.astro',
@@ -35,7 +34,6 @@ export default defineConfig({
       sidebar: [
         { label: 'Angular', link: '/angular' },
       ],
-      plugins: [ion()],
     }),
     angular({
       vite: {
