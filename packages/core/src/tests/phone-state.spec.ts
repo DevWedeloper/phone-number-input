@@ -196,6 +196,18 @@ describe('phone-state', () => {
       expect(next.phone).toBe('555')
     })
 
+    it('country-select does not reset input when country is locked', () => {
+      const state = { ...initialState, country: 'US' as const, input: '555' }
+      const cfg = { ...config, allowCountryChange: false }
+
+      const next = updatePhoneState(state, cfg, {
+        action: 'country-select',
+        value: 'CA',
+      })
+
+      expect(next.resetInput).toBe(false)
+    })
+
     it('country-select leaves input if selecting same country', () => {
       const state = { ...initialState, country: 'US' as const, input: '555' }
 
@@ -286,6 +298,40 @@ describe('phone-state', () => {
       expect(next.country).toBe('US')
       expect(next.input).toBe('555')
       expect(next.phone).toBe('+1555')
+      expect(next.derivedMode).toBe('national')
+    })
+
+    it('country-select does not reset input when country is locked', () => {
+      const state = { ...initialState, country: 'US' as const, input: '555', phone: '+1555' }
+      const cfg = { ...config, allowCountryChange: false }
+
+      const next = updatePhoneState(state, cfg, {
+        action: 'country-select',
+        value: 'CA',
+      })
+
+      expect(next.resetInput).toBe(false)
+    })
+
+    it('locked country preserves correct phone on country-select', () => {
+      const state = {
+        ...initialState,
+        country: 'US' as const,
+        input: '5551234',
+        phone: '+15551234',
+        derivedMode: 'national' as const,
+      }
+      const cfg: PhoneInputConfig = { mode: 'national', countryCode: 'US', allowCountryChange: false }
+
+      const next = updatePhoneState(state, cfg, {
+        action: 'country-select',
+        value: 'GB',
+      })
+
+      expect(next.country).toBe('US')
+      expect(next.input).toBe('5551234')
+      expect(next.phone).toBe('+15551234')
+      expect(next.resetInput).toBe(false)
       expect(next.derivedMode).toBe('national')
     })
 

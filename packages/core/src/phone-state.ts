@@ -80,7 +80,13 @@ export function updatePhoneState(
   }
 
   if (mode === 'national') {
-    const country = next.country ?? config.countryCode
+    const country = (() => {
+      if (config.allowCountryChange === false) {
+        return config.countryCode
+      }
+
+      return next.country ?? config.countryCode
+    })()
 
     next = {
       ...next,
