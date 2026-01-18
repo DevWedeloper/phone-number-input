@@ -5,28 +5,82 @@ interface Link {
 }
 
 const { links } = Astro.props as { links: Link[] }
-const { pathname } = Astro.url
 ---
 
-<nav class="relative flex gap-1 border-b border-border mb-6">
-  {
-    links.map((link) => {
-      const isActive = pathname === link.href || pathname.endsWith(link.href)
-
-      return (
-        <a
-          href={link.href}
-          aria-current={isActive ? 'page' : undefined}
-          class:list={[
-            'px-3 py-2 text-sm font-medium transition-colors relative',
-            'text-muted-foreground hover:text-foreground',
-            'after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-red-500 after:scale-x-0 after:transition-transform after:origin-left',
-            isActive && 'text-foreground after:scale-x-100',
-          ]}
-        >
+<nav class="relative border-b border-(--sl-color-hairline)" transition:persist>
+  <div class="flex gap-1" id="tabs">
+    {
+      links.map((link) => (
+        <a href={link.href} data-tab class="px-10 py-3 text-sm font-medium transition-colors no-underline">
           {link.label}
         </a>
-      )
-    })
-  }
+      ))
+    }
+  </div>
+
+  <span
+    id="tab-indicator"
+    class="ready absolute bottom-0 left-0 h-0.5 bg-(--sl-color-accent) transition-transform duration-300 ease-out"
+  >
+  </span>
 </nav>
+
+<script is:inline>
+  function updateActiveTab() {
+    const pathname = window.location.pathname
+    const tabs = document.querySelectorAll('[data-tab]')
+
+    let activeTab = null
+
+    tabs.forEach((tab) => {
+      const href = tab.getAttribute('href')
+      const isActive = pathname === href || pathname.endsWith(href)
+
+      tab.toggleAttribute('data-active', isActive)
+      tab.setAttribute('aria-current', isActive ? 'page' : 'false')
+
+      if (isActive) {
+        activeTab = tab
+      }
+    })
+
+    return activeTab
+  }
+
+  function moveIndicator(tab) {
+    const indicator = document.getElementById('tab-indicator')
+    if (!indicator || !tab) {
+      return
+    }
+
+    const tabRect = tab.getBoundingClientRect()
+    const parentRect = tab.parentElement.getBoundingClientRect()
+
+    indicator.style.width = `${tabRect.width}px`
+    indicator.style.transform = `translateX(${tabRect.left - parentRect.left}px)`
+  }
+
+  function syncIndicator() {
+    const activeTab = updateActiveTab()
+    moveIndicator(activeTab)
+
+    const indicator = document.getElementById('tab-indicator')
+    if (indicator && indicator.classList.contains('ready')) {
+      requestAnimationFrame(() => {
+        indicator.classList.remove('ready')
+      })
+    }
+  }
+
+  // Initial load
+  syncIndicator()
+
+  // After Astro navigation
+  document.addEventListener('astro:after-swap', syncIndicator)
+</script>
+
+<style is:global>
+  .ready {
+    transition: none !important;
+  }
+</style>
