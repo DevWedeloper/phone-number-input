@@ -1,20 +1,9 @@
 import type { OverlayRef } from '@angular/cdk/overlay'
-import type {
-  ElementRef,
-  TemplateRef,
-} from '@angular/core'
+import type { ElementRef, TemplateRef } from '@angular/core'
 import type { CountryCode } from 'libphonenumber-js/core'
 import { Overlay, ScrollStrategyOptions } from '@angular/cdk/overlay'
 import { TemplatePortal } from '@angular/cdk/portal'
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  signal,
-  viewChild,
-  ViewContainerRef,
-} from '@angular/core'
+import { ChangeDetectionStrategy, Component, computed, inject, signal, viewChild, ViewContainerRef } from '@angular/core'
 import { CountryCodeTrigger, PhoneCountry } from '@phone-number-input/angular'
 import { getCountries, getCountryCallingCode } from 'libphonenumber-js/core'
 import metadata from 'libphonenumber-js/min/metadata'

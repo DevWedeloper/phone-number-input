@@ -12,6 +12,7 @@ import { National } from '@/components/angular/national'
 import { NationalWithCountrySelect } from '@/components/angular/national-with-country-select'
 import { NationalWithCountrySelectLocked } from '@/components/angular/national-with-country-select-locked'
 import { 
+  countrySelect,
   autoExample,
   autoWithCountrySelectExample,
   internationalExample,
@@ -32,6 +33,11 @@ import RoutedTabs from '@/components/RoutedTabs.astro'
     { label: 'Examples', href: '/angular/examples' },
   ]}
 />
+
+# Country Select
+This is the country select component used in the examples above.
+
+<Code class='max-h-162.5 overflow-auto' lang="typescript" code={countrySelect} />
 
 # Auto
 Automatically determines the appropriate configuration based on the user's country.
