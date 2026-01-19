@@ -1,7 +1,7 @@
 ---
-import Table from '../table/Table.astro'
 import type { Root } from '../compodoc-zod'
 import type { Column, Row } from '../types/table'
+import Table from '../table/Table.astro'
 import MethodDocs from './MethodDocs.astro'
 
 interface Props {
@@ -15,7 +15,7 @@ const { data } = Astro.props
 {
   data.components.length > 0 && (
     <>
-      <h3 class="text-lg font-semibold mb-4">Components</h3>
+      <h3 class="mb-4 text-lg font-semibold">Components</h3>
       {data.components.map((comp) => {
         return (
           <section>
@@ -29,7 +29,7 @@ const { data } = Astro.props
               </p>
             )}
 
-            {comp.description && <div class="prose prose-sm max-w-none mb-4" set:html={comp.description} />}
+            {comp.description && <div class="prose prose-sm mb-4 max-w-none" set:html={comp.description} />}
           </section>
         )
       })}
@@ -106,13 +106,13 @@ const { data } = Astro.props
               {inj.name}
             </h4>
 
-            {inj.description && <div class="prose prose-sm max-w-none mb-4" set:html={inj.description} />}
+            {inj.description && <div class="prose prose-sm mb-4 max-w-none" set:html={inj.description} />}
 
             {propertyRows.length > 0 && <Table title="Properties" columns={propertyColumns} rows={propertyRows} />}
 
             {inj.methods.length > 0 && (
               <section class="mt-8">
-                <h5 class="text-base font-semibold mb-2">Methods</h5>
+                <h5 class="mb-2 text-base font-semibold">Methods</h5>
 
                 {inj.methods.map((method) => (
                   <MethodDocs method={method} />

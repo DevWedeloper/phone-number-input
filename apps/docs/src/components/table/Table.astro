@@ -11,22 +11,22 @@ const { title, columns, rows } = Astro.props
 
 function parseJsDocLinks(text: string) {
   // Replace {@link SomeType} with <code>SomeType</code> or <a>SomeType</a>
-  return text.replace(/\{@link\s+([^}]+)\}/g, (_match, p1) => {
+  return text.replace(/\{@link\s([^}]+)\}/g, (_match, p1) => {
     // You can choose either <code> or <a> depending on styling
     return `<code>${p1}</code>`
   })
 }
 ---
 
-<h4 class="mt-6 mb-2 font-semibold text-lg">{title}</h4>
+<h4 class="mt-6 mb-2 text-lg font-semibold">{title}</h4>
 
 <div class="no-scrollbar my-6 w-full overflow-x-auto rounded-lg border">
-  <table class="w-full min-w-125 text-sm caption-bottom">
+  <table class="w-full min-w-125 caption-bottom text-sm">
     <thead class="[&_tr]:border-b">
       <tr>
         {
           columns.map((col) => (
-            <th class={`text-left h-10 px-2 align-middle font-medium whitespace-nowrap ${col.class ?? ''}`}>
+            <th class={`h-10 px-2 text-left align-middle font-medium whitespace-nowrap ${col.class ?? ''}`}>
               {col.label}
             </th>
           ))

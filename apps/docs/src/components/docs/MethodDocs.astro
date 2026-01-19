@@ -14,7 +14,7 @@ const description = method.jsdoctags?.find((tag) => tag.comment)?.comment
 
 <section class="mt-6">
   {/* Method name */}
-  <h5 class="font-medium text-base">
+  <h5 class="text-base font-medium">
     {method.name}
     {method.optional && <span class="text-muted-foreground ml-1">(optional)</span>}
   </h5>
@@ -29,19 +29,19 @@ const description = method.jsdoctags?.find((tag) => tag.comment)?.comment
   }
 
   {/* Description */}
-  {description && <div class="prose prose-sm max-w-none mt-2" set:html={description} />}
+  {description && <div class="prose prose-sm mt-2 max-w-none" set:html={description} />}
 
   {/* Parameters */}
   {
     method.args.length > 0 && (
       <div class="mt-4">
-        <h6 class="text-sm font-medium mb-2">Parameters</h6>
+        <h6 class="mb-2 text-sm font-medium">Parameters</h6>
 
         <div class="space-y-3">
           {method.args.map((arg) => (
             <div>
               <div class="font-mono text-sm">{arg.name}</div>
-              <div class="font-mono text-xs text-muted-foreground">{arg.type}</div>
+              <div class="text-muted-foreground font-mono text-xs">{arg.type}</div>
             </div>
           ))}
         </div>
@@ -53,7 +53,7 @@ const description = method.jsdoctags?.find((tag) => tag.comment)?.comment
   {
     method.returnType && method.returnType !== 'void' && (
       <div class="mt-4">
-        <h6 class="text-sm font-medium mb-1">Returns</h6>
+        <h6 class="mb-1 text-sm font-medium">Returns</h6>
         <div class="font-mono text-xs">{method.returnType}</div>
       </div>
     )
