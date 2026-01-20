@@ -32,6 +32,7 @@ export default defineConfig({
         },
       ],
       sidebar: [
+        { label: 'Getting Started', link: '/getting-started' },
         { label: 'Angular', link: '/angular' },
       ],
     }),
