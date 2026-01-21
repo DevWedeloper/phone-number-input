@@ -11,7 +11,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     ssr: {
-      noExternal: ['@maskito/angular'],
+      noExternal: ['@maskito/angular', 'zod'],
     },
   },
   integrations: [
