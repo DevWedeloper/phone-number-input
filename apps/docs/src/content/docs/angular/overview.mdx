@@ -3,6 +3,9 @@ title: "Angular Overview"
 description: "Angular Overview description"
 ---
 
+import { Auto } from '@/components/angular/auto'
+import { autoExample } from './examples'
+import { Tabs, TabItem, Code } from '@astrojs/starlight/components'
 import RoutedTabs from '@/components/RoutedTabs.astro'
 
 <RoutedTabs
@@ -13,4 +16,36 @@ import RoutedTabs from '@/components/RoutedTabs.astro'
   ]}
 />
 
-angular overview
+## Overview
+
+This page describes how to use the phone number input component in an **Angular v19+** project.  
+The integration targets **modern Angular applications** using **standalone components**.
+
+## Requirements
+
+- Angular **v19 or higher**
+
+## Installation
+
+First, install the required Maskito packages and phone number parsing library:
+
+<Code lang="shell" code="pnpm add @maskito/core @maskito/kit @maskito/phone libphonenumber-js" />
+
+Next, install the Angular wrapper package for phone number input:
+
+<Code lang="shell" code="pnpm add ngx-phone-number-input" />
+
+## Minimal Usage
+
+Below is a minimal example showing how the phone number input can be used inside an Angular component.
+
+<Tabs>
+  <TabItem label="Example">
+    <div class="w-min">
+      <Auto client:load />
+    </div>
+  </TabItem>
+  <TabItem label="Code">
+    <Code lang="typescript" code={autoExample} />
+  </TabItem>
+</Tabs>
