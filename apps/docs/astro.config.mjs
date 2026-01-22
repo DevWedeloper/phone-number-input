@@ -17,6 +17,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Phone Number Input',
+      routeMiddleware: './src/routeData.ts',
       components: {
         Head: './src/components/Head.astro',
         ContentPanel: './src/components/ContentPanel.astro',
