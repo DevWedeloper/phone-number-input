@@ -15,7 +15,7 @@
     "./docs": "./docs/json/documentation.json"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.lib.json",
+    "build": "pnpm run build:docs && tsc --project tsconfig.lib.json",
     "build:docs": "pnpm typedoc",
     "watch": "tsc --project tsconfig.lib.json --watch",
     "test": "vitest",
