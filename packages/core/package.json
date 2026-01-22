@@ -11,16 +11,21 @@
     "./types": {
       "types": "./dist/types/index.d.ts",
       "default": "./dist/types/index.js"
-    }
+    },
+    "./docs": "./docs/json/documentation.json"
   },
   "scripts": {
     "build": "tsc --project tsconfig.lib.json",
+    "build:docs": "pnpm typedoc",
     "watch": "tsc --project tsconfig.lib.json --watch",
     "test": "vitest",
     "lint": "eslint . --max-warnings 0"
   },
   "peerDependencies": {
     "libphonenumber-js": "^1.12.29"
+  },
+  "dependencies": {
+    "typedoc": "^0.28.16"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.4.2",

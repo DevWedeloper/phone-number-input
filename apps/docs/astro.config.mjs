@@ -11,7 +11,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     ssr: {
-      noExternal: ['@maskito/angular', 'zod'],
+      noExternal: ['@maskito/angular'],
     },
   },
   integrations: [
@@ -34,6 +34,7 @@ export default defineConfig({
       ],
       sidebar: [
         { label: 'Getting Started', link: '/getting-started' },
+        { label: 'Core', link: '/core' },
         { label: 'Angular', link: '/angular' },
       ],
     }),

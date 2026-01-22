@@ -4,7 +4,7 @@ description: "Angular API description"
 ---
 
 import data from '@phone-number-input/angular/docs'
-import ApiDocs from '@/components/docs/ApiDocs.astro'
+import AngularApiDocs from '@/components/docs/AngularApiDocs.astro'
 import { RootSchema } from '@/components/compodoc-zod'
 
 export const parsedData = RootSchema.parse(data)
@@ -19,4 +19,4 @@ import RoutedTabs from '@/components/RoutedTabs.astro'
   ]}
 />
 
-<ApiDocs data={parsedData} />
+<AngularApiDocs data={parsedData} />

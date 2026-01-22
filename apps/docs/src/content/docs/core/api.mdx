@@ -3,4 +3,18 @@ title: "Core API"
 description: "Core API description"
 ---
 
-core API
+import data from '@phone-number-input/core/docs'
+import CoreApiDocs from '@/components/docs/CoreApiDocs.astro'
+import { RootSchema } from '@/components/typedoc-zod'
+import RoutedTabs from '@/components/RoutedTabs.astro'
+
+export const parsedData = RootSchema.parse(data)
+
+<RoutedTabs
+  links={[
+    { label: 'Overview', href: '/core/overview' },
+    { label: 'API', href: '/core/api' },
+  ]}
+/>
+
+<CoreApiDocs data={parsedData} />

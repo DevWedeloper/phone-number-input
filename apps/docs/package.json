@@ -39,12 +39,12 @@
     "rxjs": "^7.8.2",
     "tailwindcss": "^4.1.18",
     "tslib": "^2.8.1",
-    "zod": "^4.1.13",
     "zone.js": "~0.15.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.6.1",
     "@phone-number-input/angular": "workspace:*",
+    "@phone-number-input/core": "workspace:*",
     "@typescript-eslint/parser": "^8.49.0",
     "astro-eslint-parser": "^1.2.2",
     "eslint": "^9.39.1",

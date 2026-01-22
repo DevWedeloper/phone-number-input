@@ -2,7 +2,7 @@
 import type { Root } from '../compodoc-zod'
 import type { Column, Row } from '../types/table'
 import Table from '../table/Table.astro'
-import MethodDocs from './MethodDocs.astro'
+import AngularMethodDocs from './AngularMethodDocs.astro'
 
 interface Props {
   data: Root
@@ -115,7 +115,7 @@ const { data } = Astro.props
                 <h5 class="mb-2 text-base font-semibold">Methods</h5>
 
                 {inj.methods.map((method) => (
-                  <MethodDocs method={method} />
+                  <AngularMethodDocs method={method} />
                 ))}
               </section>
             )}

@@ -1,0 +1,10 @@
+{
+  "entryPoints": ["src"],
+  "json": "docs/json/documentation.json",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true,
+  "excludeInternal": true,
+  "disableSources": true,
+  "excludeNotDocumented": true
+}
