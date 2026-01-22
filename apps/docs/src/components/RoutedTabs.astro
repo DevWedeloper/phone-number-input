@@ -7,7 +7,7 @@ interface Link {
 const { links } = Astro.props as { links: Link[] }
 ---
 
-<nav class="relative border-b border-(--sl-color-hairline)" transition:persist>
+<nav class="relative border-b border-(--sl-color-hairline)">
   <div class="flex gap-1" id="tabs">
     {
       links.map((link) => (
@@ -21,6 +21,7 @@ const { links } = Astro.props as { links: Link[] }
   <span
     id="tab-indicator"
     class="ready absolute bottom-0 left-0 h-0.5 bg-(--sl-color-accent) transition-transform duration-300 ease-out"
+    transition:persist
   >
   </span>
 </nav>
