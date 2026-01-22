@@ -10,8 +10,9 @@ export const onRequest = defineRouteMiddleware((context) => {
   sidebar.forEach((link) => {
     if (link.type === 'link') {
       const linkHref = normalize(link.href)
+      const firstSegment = linkHref.split('/')[0]
 
-      link.isCurrent = currentSlug === linkHref || currentSlug.startsWith(`${linkHref}`)
+      link.isCurrent = currentSlug === firstSegment || currentSlug.startsWith(`${firstSegment}`)
     }
   })
 })
