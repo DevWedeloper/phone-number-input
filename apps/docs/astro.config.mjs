@@ -40,7 +40,9 @@ export default defineConfig({
         { label: 'Angular', link: '/angular/overview' },
       ],
       plugins: [
-        starlightThemeBlack({}),
+        starlightThemeBlack({
+          footerText: 'Built & designed by <a href="https://github.com/DevWedeloper" target="_blank" rel="noopener noreferrer">DevWedeloper</a>.',
+        }),
       ],
     }),
     angular({
