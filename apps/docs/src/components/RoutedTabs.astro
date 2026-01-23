@@ -11,7 +11,7 @@ const { links } = Astro.props as { links: Link[] }
   <div class="flex gap-1" id="tabs">
     {
       links.map((link) => (
-        <a href={link.href} data-tab class="px-10 py-3 text-sm font-medium no-underline transition-colors">
+        <a href={link.href} data-tab class="px-10 py-3 text-sm font-medium no-underline! transition-colors">
           {link.label}
         </a>
       ))

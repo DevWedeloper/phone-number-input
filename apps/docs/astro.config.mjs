@@ -5,6 +5,7 @@ import vercel from '@astrojs/vercel'
 import tailwindcss from '@tailwindcss/vite'
 // @ts-check
 import { defineConfig } from 'astro/config'
+import starlightThemeBlack from 'starlight-theme-black'
 
 // https://astro.build/config
 export default defineConfig({
@@ -37,6 +38,9 @@ export default defineConfig({
         { label: 'Getting Started', link: '/getting-started' },
         { label: 'Core', link: '/core/overview' },
         { label: 'Angular', link: '/angular/overview' },
+      ],
+      plugins: [
+        starlightThemeBlack({}),
       ],
     }),
     angular({
