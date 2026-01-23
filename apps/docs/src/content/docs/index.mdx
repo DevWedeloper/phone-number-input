@@ -6,9 +6,26 @@ head:
 description: A modern, easy-to-use phone number input component for your projects.
 template: splash
 hero:
-  tagline: Welcome to Phone Number Input
+  tagline: A modern, easy-to-use phone number input component for your projects.
   actions:
     - text: Get Started
       link: /getting-started
       icon: right-arrow
 ---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="International & National Modes" icon="translate">
+    Switch seamlessly between international and national formats with full control over how numbers are displayed and entered.
+  </Card>
+  <Card title="Validation & Parsing" icon="approve-check">
+    Leverages Maskito for flexible validation and parsing, making it easy to handle and format phone numbers programmatically.
+  </Card>
+  <Card title="Headless & Flexible" icon="puzzle">
+    Fully headless design lets you control UI and styling while leveraging the robust core logic under the hood.
+  </Card>
+  <Card title="Modern & Dev-Friendly" icon="rocket">
+    A clean, modern API designed for developers, fully tested, and easy to integrate into any project.
+  </Card>
+</CardGrid>
