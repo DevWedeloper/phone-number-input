@@ -37,7 +37,12 @@ export default defineConfig({
       sidebar: [
         { label: 'Getting Started', link: '/getting-started' },
         { label: 'Core', link: '/core/overview' },
-        { label: 'Angular', link: '/angular/overview' },
+        {
+          label: 'Frameworks',
+          items: [
+            { label: 'Angular', link: '/angular/overview' },
+          ],
+        },
       ],
       plugins: [
         starlightThemeBlack({
