@@ -16,7 +16,7 @@ const description = method.jsdoctags?.find((tag) => tag.comment)?.comment
   {/* Method name */}
   <h5 class="text-base font-medium">
     {method.name}
-    {method.optional && <span class="text-muted-foreground ml-1">(optional)</span>}
+    {method.optional && <span class="ml-1 text-gray-500">(optional)</span>}
   </h5>
 
   {/* Deprecated */}
@@ -29,7 +29,7 @@ const description = method.jsdoctags?.find((tag) => tag.comment)?.comment
   }
 
   {/* Description */}
-  {description && <div class="prose prose-sm mt-2 max-w-none" set:html={description} />}
+  {description && <div class="mt-2 max-w-none" set:html={description} />}
 
   {/* Parameters */}
   {
@@ -41,7 +41,7 @@ const description = method.jsdoctags?.find((tag) => tag.comment)?.comment
           {method.args.map((arg) => (
             <div>
               <div class="font-mono text-sm">{arg.name}</div>
-              <div class="text-muted-foreground font-mono text-xs">{arg.type}</div>
+              <div class="font-mono text-xs text-gray-500">{arg.type}</div>
             </div>
           ))}
         </div>

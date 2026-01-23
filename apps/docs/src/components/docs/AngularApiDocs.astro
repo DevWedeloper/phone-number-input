@@ -29,7 +29,7 @@ const { data } = Astro.props
               </p>
             )}
 
-            {comp.description && <div class="prose prose-sm mb-4 max-w-none" set:html={comp.description} />}
+            {comp.description && <div class="mb-4 max-w-none" set:html={comp.description} />}
           </section>
         )
       })}
@@ -69,7 +69,7 @@ const { data } = Astro.props
               </p>
             )}
 
-            {dir.description && <div class="prose prose-sm max-w-none" set:html={dir.description} />}
+            {dir.description && <div class="max-w-none" set:html={dir.description} />}
 
             {inputRows.length > 0 && <Table title="Inputs" columns={inputColumns} rows={inputRows} />}
           </section>
@@ -106,7 +106,7 @@ const { data } = Astro.props
               {inj.name}
             </h4>
 
-            {inj.description && <div class="prose prose-sm mb-4 max-w-none" set:html={inj.description} />}
+            {inj.description && <div class="mb-4 max-w-none" set:html={inj.description} />}
 
             {propertyRows.length > 0 && <Table title="Properties" columns={propertyColumns} rows={propertyRows} />}
 
