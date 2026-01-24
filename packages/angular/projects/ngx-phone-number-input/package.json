@@ -15,9 +15,5 @@
     "@phone-number-input/core": "workspace:*",
     "@phone-number-input/maskito": "workspace:*",
     "tslib": "^2.3.0"
-  },
-  "bundleDependencies": [
-    "@phone-number-input/core",
-    "@phone-number-input/maskito"
-  ]
+  }
 }
