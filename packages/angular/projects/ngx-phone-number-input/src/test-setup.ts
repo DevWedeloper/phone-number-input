@@ -3,7 +3,12 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import '@analogjs/vitest-angular/setup-zone'
 import '@testing-library/jest-dom/vitest'
 
-TestBed.initTestEnvironment(
-  [BrowserDynamicTestingModule],
-  platformBrowserDynamicTesting(),
-)
+const ANGULAR_TESTBED_SETUP = Symbol.for('angular-testbed-setup')
+
+if (!(globalThis as any)[ANGULAR_TESTBED_SETUP]) {
+  (globalThis as any)[ANGULAR_TESTBED_SETUP] = true
+  TestBed.initTestEnvironment(
+    [BrowserDynamicTestingModule],
+    platformBrowserDynamicTesting(),
+  )
+}
