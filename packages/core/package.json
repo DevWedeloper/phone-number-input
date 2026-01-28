@@ -2,7 +2,6 @@
   "name": "@phone-number-input/core",
   "type": "module",
   "version": "0.0.0",
-  "private": true,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -24,14 +23,12 @@
   "peerDependencies": {
     "libphonenumber-js": "^1.12.29"
   },
-  "dependencies": {
-    "typedoc": "^0.28.16"
-  },
   "devDependencies": {
     "@antfu/eslint-config": "^6.4.2",
     "eslint": "^9.39.1",
     "eslint-plugin-format": "^1.0.2",
     "libphonenumber-js": "^1.12.29",
+    "typedoc": "^0.28.16",
     "typescript": "~5.9.2",
     "vite": "^7.2.6",
     "vitest": "^4.0.15"
