@@ -1,6 +1,6 @@
 {
   "name": "ngx-phone-number-input",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "sideEffects": false,
   "peerDependencies": {
     "@angular/common": ">=19.2.17",
