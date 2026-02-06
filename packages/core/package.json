@@ -1,0 +1,36 @@
+{
+  "name": "@phone-number-input/core",
+  "type": "module",
+  "version": "0.0.1",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/types/index.js"
+    },
+    "./docs": "./docs/json/documentation.json"
+  },
+  "scripts": {
+    "build": "pnpm run build:docs && tsc --project tsconfig.lib.json",
+    "build:docs": "pnpm typedoc",
+    "watch": "tsc --project tsconfig.lib.json --watch",
+    "test": "vitest",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "peerDependencies": {
+    "libphonenumber-js": "^1.12.29"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.4.2",
+    "eslint": "^9.39.1",
+    "eslint-plugin-format": "^1.0.2",
+    "libphonenumber-js": "^1.12.29",
+    "typedoc": "^0.28.16",
+    "typescript": "~5.9.2",
+    "vite": "^7.2.6",
+    "vitest": "^4.0.15"
+  }
+}
