@@ -1,0 +1,75 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ngx-phone-number-input": {
+      "projectType": "library",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineTemplate": true,
+          "inlineStyle": true,
+          "changeDetection": "OnPush",
+          "skipTests": true,
+          "flat": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true,
+          "flat": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true,
+          "flat": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true,
+          "flat": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true,
+          "flat": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true,
+          "flat": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true,
+          "flat": true
+        }
+      },
+      "root": "projects/ngx-phone-number-input",
+      "sourceRoot": "projects/ngx-phone-number-input/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-phone-number-input/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-phone-number-input/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-phone-number-input/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@analogjs/vitest-angular:test"
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "a94b122e-ca86-4f8f-882c-6154fad08cc6",
+    "cache": {
+      "enabled": false
+    }
+  }
+}
