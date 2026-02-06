@@ -1,0 +1,38 @@
+{
+  "name": "@phone-number-input/maskito",
+  "type": "module",
+  "version": "0.0.1",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.lib.json",
+    "watch": "tsc --project tsconfig.lib.json --watch",
+    "test": "vitest",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "peerDependencies": {
+    "@maskito/core": "^4.0.1",
+    "@maskito/kit": "^4.0.1",
+    "@maskito/phone": "^4.0.1",
+    "libphonenumber-js": "^1.12.29"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.4.2",
+    "@maskito/core": "^4.0.1",
+    "@maskito/kit": "^4.0.1",
+    "@maskito/phone": "^4.0.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/user-event": "^14.6.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-format": "^1.0.2",
+    "jsdom": "^27.2.0",
+    "libphonenumber-js": "^1.12.29",
+    "typescript": "~5.9.2",
+    "vite": "^7.2.6",
+    "vitest": "^4.0.15"
+  }
+}
