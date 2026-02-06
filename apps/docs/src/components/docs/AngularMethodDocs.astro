@@ -1,0 +1,61 @@
+---
+import type { Method } from '../compodoc-zod'
+
+interface Props {
+  method: Method
+}
+
+const { method } = Astro.props
+
+const deprecatedTag = method.jsdoctags?.find((tag) => tag.deprecated)
+
+const description = method.jsdoctags?.find((tag) => tag.comment)?.comment
+---
+
+<section class="mt-6">
+  {/* Method name */}
+  <h5 class="text-base font-medium">
+    {method.name}
+    {method.optional && <span class="ml-1 text-gray-500">(optional)</span>}
+  </h5>
+
+  {/* Deprecated */}
+  {
+    deprecatedTag && (
+      <div class="mt-2 rounded-md border border-yellow-400/40 bg-yellow-400/10 p-3 text-sm">
+        <strong>Deprecated.</strong> {deprecatedTag.deprecationMessage}
+      </div>
+    )
+  }
+
+  {/* Description */}
+  {description && <div class="mt-2 max-w-none" set:html={description} />}
+
+  {/* Parameters */}
+  {
+    method.args.length > 0 && (
+      <div class="mt-4">
+        <h6 class="mb-2 text-sm font-medium">Parameters</h6>
+
+        <div class="space-y-3">
+          {method.args.map((arg) => (
+            <div>
+              <div class="font-mono text-sm">{arg.name}</div>
+              <div class="font-mono text-xs text-gray-500">{arg.type}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  {/* Returns */}
+  {
+    method.returnType && method.returnType !== 'void' && (
+      <div class="mt-4">
+        <h6 class="mb-1 text-sm font-medium">Returns</h6>
+        <div class="font-mono text-xs">{method.returnType}</div>
+      </div>
+    )
+  }
+</section>

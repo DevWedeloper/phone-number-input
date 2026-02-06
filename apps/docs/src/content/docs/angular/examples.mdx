@@ -1,0 +1,155 @@
+---
+title: "Angular"
+description: "Live Angular examples demonstrating Phone Number Input configurations."
+prev:
+  link: /core
+  label: Core
+---
+
+import { Auto } from '@/components/angular/auto'
+import { AutoWithCountrySelect } from '@/components/angular/auto-with-country-select'
+import { International } from '@/components/angular/international'
+import { InternationalWithCountrySelect } from '@/components/angular/international-with-country-select'
+import { InternationalWithCountrySelectLocked } from '@/components/angular/international-with-country-select-locked'
+import { National } from '@/components/angular/national'
+import { NationalWithCountrySelect } from '@/components/angular/national-with-country-select'
+import { NationalWithCountrySelectLocked } from '@/components/angular/national-with-country-select-locked'
+import { 
+  countrySelect,
+  autoExample,
+  autoWithCountrySelectExample,
+  internationalExample,
+  internationalWithCountrySelectExample,
+  internationalWithCountrySelectLockedExample,
+  nationalExample,
+  nationalWithCountrySelectExample,
+  nationalWithCountrySelectLockedExample,
+} from './examples'
+import { Tabs, TabItem, Code } from '@astrojs/starlight/components'
+
+import RoutedTabs from '@/components/RoutedTabs.astro'
+
+<RoutedTabs
+  links={[
+    { label: 'Overview', href: '/angular/overview' },
+    { label: 'API', href: '/angular/api' },
+    { label: 'Examples', href: '/angular/examples' },
+  ]}
+/>
+
+## Country Select
+This is the country select component used in the examples above.
+
+<Code class='max-h-162.5 overflow-auto' lang="typescript" code={countrySelect} />
+
+## Auto
+Automatically determines the appropriate configuration based on the user's country.
+
+<Tabs>
+  <TabItem label="Example">
+    <div class="w-min">
+      <Auto client:load />
+    </div>
+  </TabItem>
+  <TabItem label="Code">
+    <Code lang="typescript" code={autoExample} />
+  </TabItem>
+</Tabs>
+
+## Auto with Country Select
+Auto-detection with the ability for users to manually select a country.
+
+<Tabs>
+  <TabItem label="Example">
+    <div class="w-min">
+      <AutoWithCountrySelect client:load />
+    </div>
+  </TabItem>
+  <TabItem label="Code">
+    <Code lang="typescript" code={autoWithCountrySelectExample} />
+  </TabItem>
+</Tabs>
+
+## International
+International configuration with dynamic country handling.
+
+<Tabs>
+  <TabItem label="Example">
+    <div class="w-min">
+      <International client:load />
+    </div>
+  </TabItem>
+  <TabItem label="Code">
+    <Code lang="typescript" code={internationalExample} />
+  </TabItem>
+</Tabs>
+
+## International with Country Select
+International configuration that allows manual country selection.
+
+<Tabs>
+  <TabItem label="Example">
+    <div class="w-min">
+      <InternationalWithCountrySelect client:load />
+    </div>
+  </TabItem>
+  <TabItem label="Code">
+    <Code lang="typescript" code={internationalWithCountrySelectExample} />
+  </TabItem>
+</Tabs>
+
+## International with Country Select (Locked)
+International configuration with country selection locked.
+
+<Tabs>
+  <TabItem label="Example">
+    <div class="w-min">
+      <InternationalWithCountrySelectLocked client:load />
+    </div>
+  </TabItem>
+  <TabItem label="Code">
+    <Code lang="typescript" code={internationalWithCountrySelectLockedExample} />
+  </TabItem>
+</Tabs>
+
+## National
+National-only configuration with no international behavior.
+
+<Tabs>
+  <TabItem label="Example">
+    <div class="w-min">
+      <National client:load />
+    </div>
+  </TabItem>
+  <TabItem label="Code">
+    <Code lang="typescript" code={nationalExample} />
+  </TabItem>
+</Tabs>
+
+## National with Country Select
+National configuration that allows selecting a country.
+
+<Tabs>
+  <TabItem label="Example">
+    <div class="w-min">
+      <NationalWithCountrySelect client:load />
+    </div>
+  </TabItem>
+  <TabItem label="Code">
+    <Code lang="typescript" code={nationalWithCountrySelectExample} />
+  </TabItem>
+</Tabs>
+
+## National with Country Select (Locked)
+National configuration with country selection locked.
+
+<Tabs>
+  <TabItem label="Example">
+    <div class="w-min">
+      <NationalWithCountrySelectLocked client:load />
+    </div>
+  </TabItem>
+  <TabItem label="Code">
+    <Code lang="typescript" code={nationalWithCountrySelectLockedExample} />
+  </TabItem>
+</Tabs>

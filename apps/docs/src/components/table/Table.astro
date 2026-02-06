@@ -1,0 +1,54 @@
+---
+import type { Column, Row } from '../types/table'
+
+interface Props {
+  title: string
+  columns: Column[]
+  rows: Row[]
+}
+
+const { title, columns, rows } = Astro.props
+
+function parseJsDocLinks(text: string) {
+  // Replace {@link SomeType} with <code>SomeType</code> or <a>SomeType</a>
+  return text.replace(/\{@link\s([^}]+)\}/g, (_match, p1) => {
+    // You can choose either <code> or <a> depending on styling
+    return `<code>${p1}</code>`
+  })
+}
+---
+
+<h4 class="mt-6 mb-2 text-lg font-semibold">{title}</h4>
+
+<div class="no-scrollbar my-6 w-full overflow-x-auto rounded-lg border">
+  <table class="w-full min-w-125 caption-bottom text-sm">
+    <thead class="[&_tr]:border-b">
+      <tr>
+        {
+          columns.map((col) => (
+            <th class={`h-10 px-2 text-left align-middle font-medium whitespace-nowrap ${col.class ?? ''}`}>
+              {col.label}
+            </th>
+          ))
+        }
+      </tr>
+    </thead>
+    <tbody class="[&_tr:last-child]:border-0">
+      {
+        rows.map((row) => (
+          <tr class="hover:bg-muted/50 border-b transition-colors">
+            {columns.map((col) => (
+              <td class={`p-2 align-middle ${col.class ?? ''}`}>
+                {col.key === 'description' && row[col.key] ? (
+                  <div set:html={parseJsDocLinks(row[col.key])} />
+                ) : (
+                  (row[col.key] ?? <span class="sr-only">-</span>)
+                )}
+              </td>
+            ))}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

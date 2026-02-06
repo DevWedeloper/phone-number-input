@@ -1,0 +1,127 @@
+---
+import type { Root } from '../compodoc-zod'
+import type { Column, Row } from '../types/table'
+import Table from '../table/Table.astro'
+import AngularMethodDocs from './AngularMethodDocs.astro'
+
+interface Props {
+  data: Root
+}
+
+const { data } = Astro.props
+---
+
+{/* COMPONENTS */}
+{
+  data.components.length > 0 && (
+    <>
+      <h3 class="mb-4 text-lg font-semibold">Components</h3>
+      {data.components.map((comp) => {
+        return (
+          <section>
+            <h4 id={comp.name.toLowerCase()} class="mb-2">
+              {comp.name}
+            </h4>
+
+            {comp.selector && (
+              <p class="mb-2">
+                Selector: <code class="ml-1">{comp.selector}</code>
+              </p>
+            )}
+
+            {comp.description && <div class="mb-4 max-w-none" set:html={comp.description} />}
+          </section>
+        )
+      })}
+    </>
+  )
+}
+
+{/* DIRECTIVES */}
+{
+  data.directives.length > 0 && (
+    <>
+      <h3 class="text-lg font-semibold">Directives</h3>
+      {data.directives.map((dir) => {
+        const inputColumns: Column[] = [
+          { label: 'Prop', key: 'name', class: 'font-medium' },
+          { label: 'Type', key: 'type' },
+          { label: 'Default', key: 'defaultValue' },
+          { label: 'Description', key: 'description' },
+        ]
+
+        const inputRows: Row[] = dir.inputsClass.map((input) => ({
+          name: input.name,
+          type: input.type,
+          defaultValue: input.defaultValue ?? '-',
+          description: input.description ?? '-',
+        }))
+
+        return (
+          <section>
+            <h4 id={dir.name.toLowerCase()} class="mb-2">
+              {dir.name}
+            </h4>
+
+            {dir.selector && (
+              <p class="mb-2">
+                Selector: <code class="ml-1">{dir.selector}</code>
+              </p>
+            )}
+
+            {dir.description && <div class="max-w-none" set:html={dir.description} />}
+
+            {inputRows.length > 0 && <Table title="Inputs" columns={inputColumns} rows={inputRows} />}
+          </section>
+        )
+      })}
+    </>
+  )
+}
+
+{/* INJECTABLES */}
+{
+  data.injectables.length > 0 && (
+    <>
+      <h3 class="text-lg font-semibold">Services</h3>
+      {data.injectables.map((inj) => {
+        const propertyColumns: Column[] = [
+          { label: 'Prop', key: 'name', class: 'font-medium' },
+          { label: 'Type', key: 'type' },
+          { label: 'Default', key: 'defaultValue' },
+          { label: 'Description', key: 'description' },
+        ]
+
+        const propertyRows: Row[] = inj.properties.map((prop) => ({
+          name: prop.name,
+          type: prop.type,
+          defaultValue: prop.defaultValue ?? '-',
+          optional: prop.optional ? 'Yes' : 'No',
+          description: prop.description ?? '-',
+        }))
+
+        return (
+          <section>
+            <h4 id={inj.name.toLowerCase()} class="mb-2">
+              {inj.name}
+            </h4>
+
+            {inj.description && <div class="mb-4 max-w-none" set:html={inj.description} />}
+
+            {propertyRows.length > 0 && <Table title="Properties" columns={propertyColumns} rows={propertyRows} />}
+
+            {inj.methods.length > 0 && (
+              <section class="mt-8">
+                <h5 class="mb-2 text-base font-semibold">Methods</h5>
+
+                {inj.methods.map((method) => (
+                  <AngularMethodDocs method={method} />
+                ))}
+              </section>
+            )}
+          </section>
+        )
+      })}
+    </>
+  )
+}

@@ -1,0 +1,25 @@
+---
+title: "Angular"
+description: "API reference for the Angular Phone Number Input integration."
+prev:
+  link: /core
+  label: Core
+---
+
+import data from '@phone-number-input/angular/docs'
+import AngularApiDocs from '@/components/docs/AngularApiDocs.astro'
+import { RootSchema } from '@/components/compodoc-zod'
+
+export const parsedData = RootSchema.parse(data)
+
+import RoutedTabs from '@/components/RoutedTabs.astro'
+
+<RoutedTabs
+  links={[
+    { label: 'Overview', href: '/angular/overview' },
+    { label: 'API', href: '/angular/api' },
+    { label: 'Examples', href: '/angular/examples' },
+  ]}
+/>
+
+<AngularApiDocs data={parsedData} />
