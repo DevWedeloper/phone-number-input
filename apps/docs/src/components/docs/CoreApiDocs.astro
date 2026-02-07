@@ -1,6 +1,7 @@
 ---
 import type { Root } from '../typedoc-zod'
 import type { Column, Row } from '../types/table'
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro'
 import Table from '../table/Table.astro'
 
 interface Props {
@@ -45,24 +46,26 @@ const { data } = Astro.props
 
         return (
           <section class="mb-10">
-            {/* TYPE NAME */}
-            <h3 id={typeAlias.name.toLowerCase()} class="mb-2 text-lg font-semibold">
+            <AnchorHeading level="2" id={typeAlias.name.toLowerCase()} class="mb-2 text-lg font-semibold">
               {typeAlias.name}
-            </h3>
+            </AnchorHeading>
 
-            {/* KIND */}
             <p class="mb-2 text-sm text-gray-500">Type alias</p>
 
-            {/* DESCRIPTION */}
             {description && (
               <div class="mb-4 max-w-none">
                 <p>{description}</p>
               </div>
             )}
 
-            {/* UNION VARIANTS */}
             <section class="mt-6">
-              <h4 class="mb-3 text-base font-semibold">Variants</h4>
+              <AnchorHeading
+                level="3"
+                id={`${typeAlias.name.toLowerCase()}-variants`}
+                class="mb-3 text-base font-semibold"
+              >
+                Variants
+              </AnchorHeading>
 
               {typeAlias.type.types.map((variant, index) => {
                 const columns: Column[] = [

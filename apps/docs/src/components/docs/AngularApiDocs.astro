@@ -1,6 +1,7 @@
 ---
 import type { Root } from '../compodoc-zod'
 import type { Column, Row } from '../types/table'
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro'
 import Table from '../table/Table.astro'
 import AngularMethodDocs from './AngularMethodDocs.astro'
 
@@ -15,13 +16,16 @@ const { data } = Astro.props
 {
   data.components.length > 0 && (
     <>
-      <h3 class="mb-4 text-lg font-semibold">Components</h3>
+      <AnchorHeading level="2" id="components" class="mb-4 text-lg font-semibold">
+        Components
+      </AnchorHeading>
+
       {data.components.map((comp) => {
         return (
           <section>
-            <h4 id={comp.name.toLowerCase()} class="mb-2">
+            <AnchorHeading level="3" id={comp.name.toLowerCase()} class="mb-2">
               {comp.name}
-            </h4>
+            </AnchorHeading>
 
             {comp.selector && (
               <p class="mb-2">
@@ -41,7 +45,10 @@ const { data } = Astro.props
 {
   data.directives.length > 0 && (
     <>
-      <h3 class="text-lg font-semibold">Directives</h3>
+      <AnchorHeading level="2" id="directives" class="text-lg font-semibold">
+        Directives
+      </AnchorHeading>
+
       {data.directives.map((dir) => {
         const inputColumns: Column[] = [
           { label: 'Prop', key: 'name', class: 'font-medium' },
@@ -59,9 +66,9 @@ const { data } = Astro.props
 
         return (
           <section>
-            <h4 id={dir.name.toLowerCase()} class="mb-2">
+            <AnchorHeading level="3" id={dir.name.toLowerCase()} class="mb-2">
               {dir.name}
-            </h4>
+            </AnchorHeading>
 
             {dir.selector && (
               <p class="mb-2">
@@ -83,7 +90,10 @@ const { data } = Astro.props
 {
   data.injectables.length > 0 && (
     <>
-      <h3 class="text-lg font-semibold">Services</h3>
+      <AnchorHeading level="2" id="services" class="text-lg font-semibold">
+        Services
+      </AnchorHeading>
+
       {data.injectables.map((inj) => {
         const propertyColumns: Column[] = [
           { label: 'Prop', key: 'name', class: 'font-medium' },
@@ -102,9 +112,9 @@ const { data } = Astro.props
 
         return (
           <section>
-            <h4 id={inj.name.toLowerCase()} class="mb-2">
+            <AnchorHeading level="3" id={inj.name.toLowerCase()} class="mb-2">
               {inj.name}
-            </h4>
+            </AnchorHeading>
 
             {inj.description && <div class="mb-4 max-w-none" set:html={inj.description} />}
 
