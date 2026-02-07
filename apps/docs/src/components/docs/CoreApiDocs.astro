@@ -2,6 +2,7 @@
 import type { Root } from '../typedoc-zod'
 import type { Column, Row } from '../types/table'
 import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro'
+import { toKebabCase } from '@/utils/string'
 import Table from '../table/Table.astro'
 
 interface Props {
@@ -46,7 +47,7 @@ const { data } = Astro.props
 
         return (
           <section class="mb-10">
-            <AnchorHeading level="2" id={typeAlias.name.toLowerCase()} class="mb-2 text-lg font-semibold">
+            <AnchorHeading level="2" id={toKebabCase(typeAlias.name)} class="mb-2 text-lg font-semibold">
               {typeAlias.name}
             </AnchorHeading>
 
@@ -61,7 +62,7 @@ const { data } = Astro.props
             <section class="mt-6">
               <AnchorHeading
                 level="3"
-                id={`${typeAlias.name.toLowerCase()}-variants`}
+                id={`${toKebabCase(typeAlias.name)}-variants`}
                 class="mb-3 text-base font-semibold"
               >
                 Variants

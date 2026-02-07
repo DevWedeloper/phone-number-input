@@ -2,6 +2,7 @@
 import type { Root } from '../compodoc-zod'
 import type { Column, Row } from '../types/table'
 import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro'
+import { toKebabCase } from '@/utils/string'
 import Table from '../table/Table.astro'
 import AngularMethodDocs from './AngularMethodDocs.astro'
 
@@ -23,7 +24,7 @@ const { data } = Astro.props
       {data.components.map((comp) => {
         return (
           <section>
-            <AnchorHeading level="3" id={comp.name.toLowerCase()} class="mb-2">
+            <AnchorHeading level="3" id={toKebabCase(comp.name)} class="mb-2">
               {comp.name}
             </AnchorHeading>
 
@@ -66,7 +67,7 @@ const { data } = Astro.props
 
         return (
           <section>
-            <AnchorHeading level="3" id={dir.name.toLowerCase()} class="mb-2">
+            <AnchorHeading level="3" id={toKebabCase(dir.name)} class="mb-2">
               {dir.name}
             </AnchorHeading>
 
@@ -112,7 +113,7 @@ const { data } = Astro.props
 
         return (
           <section>
-            <AnchorHeading level="3" id={inj.name.toLowerCase()} class="mb-2">
+            <AnchorHeading level="3" id={toKebabCase(inj.name)} class="mb-2">
               {inj.name}
             </AnchorHeading>
 
