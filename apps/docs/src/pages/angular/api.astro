@@ -1,0 +1,42 @@
+---
+import type { MarkdownHeading } from 'astro'
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+import data from '@phone-number-input/angular/docs'
+import { getAngularPageStructure } from '@/components/angular-page-structure'
+import { RootSchema } from '@/components/compodoc-zod'
+import AngularApiDocs from '@/components/docs/AngularApiDocs.astro'
+import RoutedTabs from '@/components/RoutedTabs.astro'
+import { toKebabCase } from '@/utils/string'
+
+const parsedData = RootSchema.parse(data)
+
+const pageStructure = getAngularPageStructure(parsedData)
+
+const headings: MarkdownHeading[] = pageStructure.flatMap((category) => [
+  { depth: 2, slug: toKebabCase(category.key), text: category.label },
+  ...category.items.map((item) => ({
+    depth: 3,
+    slug: toKebabCase(item.name),
+    text: item.name,
+  })),
+])
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'Angular',
+    description: 'RAPI reference for the Angular Phone Number Input integration.',
+    prev: { link: '/core', label: 'Core' },
+  }}
+  headings={headings}
+>
+  <RoutedTabs
+    links={[
+      { label: 'Overview', href: '/angular/overview' },
+      { label: 'API', href: '/angular/api' },
+      { label: 'Examples', href: '/angular/examples' },
+    ]}
+  />
+
+  <AngularApiDocs data={pageStructure} />
+</StarlightPage>

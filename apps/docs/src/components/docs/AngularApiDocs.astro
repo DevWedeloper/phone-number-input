@@ -1,138 +1,60 @@
 ---
-import type { Root } from '../compodoc-zod'
-import type { Column, Row } from '../types/table'
+import type { AngularPageStructure, GenericItem } from '../angular-page-structure'
 import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro'
 import { toKebabCase } from '@/utils/string'
+import { renderItem } from '../angular-page-structure'
 import Table from '../table/Table.astro'
 import AngularMethodDocs from './AngularMethodDocs.astro'
 
 interface Props {
-  data: Root
+  data: AngularPageStructure
 }
 
 const { data } = Astro.props
 ---
 
-{/* COMPONENTS */}
 {
-  data.components.length > 0 && (
-    <>
-      <AnchorHeading level="2" id="components" class="mb-4 text-lg font-semibold">
-        Components
-      </AnchorHeading>
+  data.map(
+    (section) =>
+      section.items.length > 0 && (
+        <>
+          <AnchorHeading level="2" id={toKebabCase(section.key)} class="mb-4 text-lg font-semibold">
+            {section.label}
+          </AnchorHeading>
 
-      {data.components.map((comp) => {
-        return (
-          <section>
-            <AnchorHeading level="3" id={toKebabCase(comp.name)} class="mb-2">
-              {comp.name}
-            </AnchorHeading>
+          {section.items.map((item) => {
+            const rendered: GenericItem = renderItem(item)
 
-            {comp.selector && (
-              <p class="mb-2">
-                Selector: <code class="ml-1">{comp.selector}</code>
-              </p>
-            )}
+            return (
+              <>
+                <AnchorHeading level="3" id={rendered.id} class="mb-2">
+                  {rendered.name}
+                </AnchorHeading>
 
-            {comp.description && <div class="mb-4 max-w-none" set:html={comp.description} />}
-          </section>
-        )
-      })}
-    </>
-  )
-}
+                {rendered.selector && (
+                  <p class="mb-2">
+                    Selector: <code class="ml-1">{rendered.selector}</code>
+                  </p>
+                )}
 
-{/* DIRECTIVES */}
-{
-  data.directives.length > 0 && (
-    <>
-      <AnchorHeading level="2" id="directives" class="text-lg font-semibold">
-        Directives
-      </AnchorHeading>
+                {rendered.description && <div class="mb-4 max-w-none" set:html={rendered.description} />}
 
-      {data.directives.map((dir) => {
-        const inputColumns: Column[] = [
-          { label: 'Prop', key: 'name', class: 'font-medium' },
-          { label: 'Type', key: 'type' },
-          { label: 'Default', key: 'defaultValue' },
-          { label: 'Description', key: 'description' },
-        ]
+                {rendered.table && (
+                  <Table title={rendered.table.title} columns={rendered.table.columns} rows={rendered.table.rows} />
+                )}
 
-        const inputRows: Row[] = dir.inputsClass.map((input) => ({
-          name: input.name,
-          type: input.type,
-          defaultValue: input.defaultValue ?? '-',
-          description: input.description ?? '-',
-        }))
-
-        return (
-          <section>
-            <AnchorHeading level="3" id={toKebabCase(dir.name)} class="mb-2">
-              {dir.name}
-            </AnchorHeading>
-
-            {dir.selector && (
-              <p class="mb-2">
-                Selector: <code class="ml-1">{dir.selector}</code>
-              </p>
-            )}
-
-            {dir.description && <div class="max-w-none" set:html={dir.description} />}
-
-            {inputRows.length > 0 && <Table title="Inputs" columns={inputColumns} rows={inputRows} />}
-          </section>
-        )
-      })}
-    </>
-  )
-}
-
-{/* INJECTABLES */}
-{
-  data.injectables.length > 0 && (
-    <>
-      <AnchorHeading level="2" id="services" class="text-lg font-semibold">
-        Services
-      </AnchorHeading>
-
-      {data.injectables.map((inj) => {
-        const propertyColumns: Column[] = [
-          { label: 'Prop', key: 'name', class: 'font-medium' },
-          { label: 'Type', key: 'type' },
-          { label: 'Default', key: 'defaultValue' },
-          { label: 'Description', key: 'description' },
-        ]
-
-        const propertyRows: Row[] = inj.properties.map((prop) => ({
-          name: prop.name,
-          type: prop.type,
-          defaultValue: prop.defaultValue ?? '-',
-          optional: prop.optional ? 'Yes' : 'No',
-          description: prop.description ?? '-',
-        }))
-
-        return (
-          <section>
-            <AnchorHeading level="3" id={toKebabCase(inj.name)} class="mb-2">
-              {inj.name}
-            </AnchorHeading>
-
-            {inj.description && <div class="mb-4 max-w-none" set:html={inj.description} />}
-
-            {propertyRows.length > 0 && <Table title="Properties" columns={propertyColumns} rows={propertyRows} />}
-
-            {inj.methods.length > 0 && (
-              <section class="mt-8">
-                <h5 class="mb-2 text-base font-semibold">Methods</h5>
-
-                {inj.methods.map((method) => (
-                  <AngularMethodDocs method={method} />
-                ))}
-              </section>
-            )}
-          </section>
-        )
-      })}
-    </>
+                {rendered.methods && rendered.methods.length > 0 && (
+                  <section class="mt-8">
+                    <h5 class="mb-2 text-base font-semibold">Methods</h5>
+                    {rendered.methods.map((method) => (
+                      <AngularMethodDocs method={method} />
+                    ))}
+                  </section>
+                )}
+              </>
+            )
+          })}
+        </>
+      ),
   )
 }
