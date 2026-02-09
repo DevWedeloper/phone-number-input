@@ -1,8 +1,8 @@
 ---
-import type { AngularPageStructure, GenericItem } from '../angular-page-structure'
+import type { AngularPageStructure, GenericItem } from '@/config/angular-page-structure'
 import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro'
+import { renderItem } from '@/config/angular-page-structure'
 import { toKebabCase } from '@/utils/string'
-import { renderItem } from '../angular-page-structure'
 import Table from '../table/Table.astro'
 import AngularMethodDocs from './AngularMethodDocs.astro'
 

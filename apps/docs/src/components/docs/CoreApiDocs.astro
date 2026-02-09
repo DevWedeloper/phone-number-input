@@ -1,9 +1,9 @@
 ---
-import type { GenericItem, TypedocItem, TypedocPageStructure } from '../typedoc-page-structure'
+import type { GenericItem, TypedocItem, TypedocPageStructure } from '@/config/typedoc-page-structure'
 import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro'
+import { renderItem } from '@/config/typedoc-page-structure'
 import { toKebabCase } from '@/utils/string'
 import Table from '../table/Table.astro'
-import { renderItem } from '../typedoc-page-structure'
 
 interface Props {
   data: TypedocPageStructure

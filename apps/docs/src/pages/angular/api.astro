@@ -2,10 +2,10 @@
 import type { MarkdownHeading } from 'astro'
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
 import data from '@phone-number-input/angular/docs'
-import { getAngularPageStructure } from '@/components/angular-page-structure'
-import { RootSchema } from '@/components/compodoc-zod'
 import AngularApiDocs from '@/components/docs/AngularApiDocs.astro'
 import RoutedTabs from '@/components/RoutedTabs.astro'
+import { getAngularPageStructure } from '@/config/angular-page-structure'
+import { RootSchema } from '@/schemas/compodoc-zod'
 import { toKebabCase } from '@/utils/string'
 
 const parsedData = RootSchema.parse(data)

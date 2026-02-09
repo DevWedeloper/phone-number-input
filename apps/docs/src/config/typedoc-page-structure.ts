@@ -1,4 +1,4 @@
-import type { Root, TypeNode } from './typedoc-zod'
+import type { Root, TypeNode } from '@/schemas/typedoc-zod'
 import { toKebabCase } from '@/utils/string'
 
 /* ------------------------------

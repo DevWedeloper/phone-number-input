@@ -1,4 +1,4 @@
-import type { Root } from './compodoc-zod'
+import type { Root } from '@/schemas/compodoc-zod'
 import { toKebabCase } from '@/utils/string'
 
 /* ------------------------------
