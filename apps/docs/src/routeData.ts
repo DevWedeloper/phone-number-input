@@ -7,12 +7,20 @@ export const onRequest = defineRouteMiddleware((context) => {
 
   const currentSlug = normalize(id)
 
-  sidebar.forEach((link) => {
-    if (link.type === 'link') {
-      const linkHref = normalize(link.href)
-      const firstSegment = linkHref.split('/')[0]
+  const markCurrent = (items: typeof sidebar) => {
+    items.forEach((item) => {
+      if (item.type === 'link' && item.href) {
+        const linkHref = normalize(item.href)
+        const firstSegment = linkHref.split('/')[0]
 
-      link.isCurrent = currentSlug === firstSegment || currentSlug.startsWith(`${firstSegment}`)
-    }
-  })
+        item.isCurrent = currentSlug === firstSegment || currentSlug.startsWith(`${firstSegment}`)
+      }
+
+      if (item.type === 'group' && item.entries) {
+        markCurrent(item.entries)
+      }
+    })
+  }
+
+  markCurrent(sidebar)
 })
