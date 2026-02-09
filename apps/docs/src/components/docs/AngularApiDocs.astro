@@ -37,11 +37,7 @@ const { data } = Astro.props
                   </p>
                 )}
 
-                {rendered.description && (
-                  <div class="mb-4 max-w-none">
-                    <p>{rendered.description}</p>
-                  </div>
-                )}
+                {rendered.description && <div class="mb-4 max-w-none" set:html={rendered.description} />}
 
                 {rendered.table && (
                   <Table title={rendered.table.title} columns={rendered.table.columns} rows={rendered.table.rows} />

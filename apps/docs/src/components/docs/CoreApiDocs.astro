@@ -28,11 +28,7 @@ const { data } = Astro.props
               {rendered.name}
             </AnchorHeading>
 
-            {rendered.description && (
-              <div class="mb-4 max-w-none">
-                <p>{rendered.description}</p>
-              </div>
-            )}
+            {rendered.description && <div class="mb-4 max-w-none" set:html={rendered.description} />}
 
             {rendered.code && (
               <pre class="mb-4 rounded-lg border whitespace-normal">
