@@ -73,6 +73,7 @@ const RootSchema = z.object({
 
 export { RootSchema }
 
+type TypeNode = z.infer<typeof TypeNodeSchema>
 type Root = z.infer<typeof RootSchema>
 
-export type { Root }
+export type { Root, TypeNode }

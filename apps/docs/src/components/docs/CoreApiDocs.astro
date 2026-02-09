@@ -1,94 +1,68 @@
 ---
-import type { Root } from '../typedoc-zod'
-import type { Column, Row } from '../types/table'
+import type { GenericItem, TypedocItem, TypedocPageStructure } from '../typedoc-page-structure'
+import AnchorHeading from '@astrojs/starlight/components/AnchorHeading.astro'
+import { toKebabCase } from '@/utils/string'
 import Table from '../table/Table.astro'
+import { renderItem } from '../typedoc-page-structure'
 
 interface Props {
-  data: Root
-}
-
-function renderType(type: any): string {
-  switch (type.type) {
-    case 'intrinsic':
-      return type.name
-
-    case 'reference':
-      return type.name
-
-    case 'literal':
-      return JSON.stringify(type.value)
-
-    case 'union':
-      return type.types.map(renderType).join(' | ')
-
-    case 'reflection':
-      return `{ ${type.declaration.children
-        .map((p: any) => {
-          const optional = p.flags?.isOptional ? '?' : ''
-          return `${p.name}${optional}: ${renderType(p.type)}`
-        })
-        .join('; ')} }`
-
-    default:
-      return 'unknown'
-  }
+  data: TypedocPageStructure
 }
 
 const { data } = Astro.props
 ---
 
 {
-  data.children.length > 0 && (
+  data.map((section) => (
     <>
-      {data.children.map((typeAlias) => {
-        const description = typeAlias.comment?.summary.map((s) => s.text).join('') ?? ''
+      <AnchorHeading level="2" id={toKebabCase(section.key)} class="mb-2 text-lg font-semibold">
+        {section.label}
+      </AnchorHeading>
+
+      {section.items.map((item: TypedocItem) => {
+        const rendered: GenericItem = renderItem(item)
 
         return (
-          <section class="mb-10">
-            {/* TYPE NAME */}
-            <h3 id={typeAlias.name.toLowerCase()} class="mb-2 text-lg font-semibold">
-              {typeAlias.name}
-            </h3>
+          <>
+            <AnchorHeading level="3" id={rendered.id} class="mb-2 text-base font-semibold">
+              {rendered.name}
+            </AnchorHeading>
 
-            {/* KIND */}
-            <p class="mb-2 text-sm text-gray-500">Type alias</p>
-
-            {/* DESCRIPTION */}
-            {description && (
+            {rendered.description && (
               <div class="mb-4 max-w-none">
-                <p>{description}</p>
+                <p>{rendered.description}</p>
               </div>
             )}
 
-            {/* UNION VARIANTS */}
-            <section class="mt-6">
-              <h4 class="mb-3 text-base font-semibold">Variants</h4>
+            {rendered.code && (
+              <pre class="mb-4 rounded-lg border whitespace-normal">
+                <code class="bg-transparent!">{rendered.code}</code>
+              </pre>
+            )}
 
-              {typeAlias.type.types.map((variant, index) => {
-                const columns: Column[] = [
-                  { label: 'Property', key: 'name', class: 'font-medium' },
-                  { label: 'Type', key: 'type' },
-                  { label: 'Optional', key: 'optional' },
-                ]
+            {rendered.table && (
+              <Table title={rendered.table.title} columns={rendered.table.columns} rows={rendered.table.rows} />
+            )}
 
-                const rows: Row[] = variant.declaration.children.map((prop: any) => ({
-                  name: prop.name,
-                  type: renderType(prop.type),
-                  optional: prop.flags?.isOptional ? 'Yes' : 'No',
-                }))
-
-                return (
-                  <section class="mb-6">
-                    <h5 class="mb-2 text-sm font-semibold">Variant {index + 1}</h5>
-
-                    <Table title="Properties" columns={columns} rows={rows} />
-                  </section>
-                )
-              })}
-            </section>
-          </section>
+            {rendered.methods && rendered.methods.length > 0 && (
+              <section class="mt-4">
+                <h4 class="mb-2 text-sm font-semibold">Methods</h4>
+                <Table
+                  title="Methods"
+                  columns={[
+                    { label: 'Name', key: 'name', class: 'font-medium' },
+                    { label: 'Description', key: 'description' },
+                  ]}
+                  rows={rendered.methods.map((m) => ({
+                    name: m.name,
+                    description: m.description ?? '-',
+                  }))}
+                />
+              </section>
+            )}
+          </>
         )
       })}
     </>
-  )
+  ))
 }
